@@ -15,7 +15,6 @@ namespace SigmaHomework
 
         public void AddProduct(Product product) => _products.Add(product);
         public void RemoveProduct(Product product) => _products.Remove(product);
-        public Product[] GetProducts() => _products.ToArray();
         public override string ToString()
         {
             return string.Join("-----------------------------------\n", _products) +

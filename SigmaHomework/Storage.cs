@@ -11,38 +11,24 @@ namespace SigmaHomework
     {
         private List<Product> _products;
 
-        public void InputDialogData()
+        public void AddDialogData()
         {
             Console.Write("Enter number of products you want to add to storage: ");
-            if (int.TryParse(Console.ReadLine(), out int numberOfProducts) && numberOfProducts > 0)
+            if (int.TryParse(Console.ReadLine(), out int numberOfProducts))
             {
                 while (numberOfProducts > 0)
                 {
-                    Console.Write("1) Product;\n2) Meat;\n3) Dairy product;\nSelect product type: ");
-                    if (int.TryParse(Console.ReadLine(), out int number) && number < 4)
+                    Console.Write("1) Meat;\n2) Dairy product;\nSelect product type: ");
+                    if (int.TryParse(Console.ReadLine(), out int number) && number <= 2 && number >= 1)
                     {
-                        Console.Write("Enter product name: ");
-                        string name = Console.ReadLine();
-                        Console.Write("Enter product weight: ");
-                        decimal weight = decimal.Parse(Console.ReadLine());
-                        Console.Write("Enter product price: ");
-                        decimal price = decimal.Parse(Console.ReadLine());
                         Product product = null;
                         switch (number)
                         {
                             case 1:
-                                product = new Product(name, price, weight);
+                                product = UserDialogInitializer.InitializeMeat();
                                 break;
                             case 2:
-                                Console.Write("1) Top grade;\n2) First grade;\n3) Second grade;\nSelect meat category: ");
-                                MeatCategory meatCategory = (MeatCategory)(int.Parse(Console.ReadLine()) - 1);
-                                Console.Write("1) Mutton;\n2) Veal;\n3) Pork;\n4) Chicken;\nSelect meat type: ");
-                                MeatType meatType = (MeatType)(int.Parse(Console.ReadLine()) - 1);
-                                product = new Meat(meatCategory, meatType, name, price, weight);
-                                break;
-                            case 3:
-                                Console.Write("Enter expiration date of the product (in days): ");
-                                product = new DairyProduct(int.Parse(Console.ReadLine()), name, price, weight);
+                                product = UserDialogInitializer.InitializeDairyProduct();
                                 break;
                         }
                         _products.Add(product);
@@ -51,7 +37,7 @@ namespace SigmaHomework
                 }
             }
         }
-        public void InputInitializedData(Product[] products)
+        public void AddInitializedData(Product[] products)
         {
             if (products != null)
             {
@@ -68,6 +54,10 @@ namespace SigmaHomework
         public IEnumerable<Meat> FindAllMeat()
         {
             return _products.Where(p => p is Meat).Select(p => (Meat)p);
+        }
+        public IEnumerable<DairyProduct> FindAllDairyProducts()
+        {
+            return _products.Where(p => p is DairyProduct).Select(p => (DairyProduct)p);
         }
         public void ChangePriceForProducts(decimal percent)
         {

@@ -26,8 +26,8 @@ namespace SigmaHomework.Products
         {
             var expirationDatePercent = ExpirationDate switch
             {
-                < 7 => 7,
-                >= 7 and < 14 => 4,
+                < 7 => -7,
+                >= 7 and < 14 => -4,
                 _ => 0
             };
             base.ChangePrice(percent + expirationDatePercent);
@@ -47,9 +47,28 @@ namespace SigmaHomework.Products
             return base.ToString() +
                 $"Product expiration date: {ExpirationDate}\n";
         }
-        public DairyProduct(int expirationDate, string name, decimal price, decimal weight) : base(name, price, weight)
+        public override void Parse(string stringToParse)
+        {
+            if (stringToParse == null || stringToParse.Split(' ').Length != 4)
+            {
+                throw new ArgumentException("Wrong string to parse!");
+            }
+            var splitedString = stringToParse.Split(' ');
+            base.Parse(string.Join(' ', splitedString[0..3]));
+            ExpirationDate = int.Parse(splitedString[3]);
+        }
+        public DairyProduct() : this("", 0.0m, 0.1m, 0)
+        {
+
+        }
+        public DairyProduct(string name, decimal price, decimal weight, int expirationDate) : base(name, price, weight)
         {
             ExpirationDate = expirationDate;
+        }
+        public void Deconstruct(out string name, out decimal price, out decimal weight, out int expirationDate)
+        {
+            Deconstruct(out name, out price, out weight);
+            expirationDate = ExpirationDate;
         }
     }
 }

@@ -8,13 +8,18 @@ namespace SigmaHomework
 {
     public class Product
     {
+        private string _name;
         private decimal _price;
         private decimal _weight;
-        public string Name { get; private set; } = "Undefined name";
+        public string Name
+        {
+            get => _name;
+            protected set => _name = value == null ? "" : value;
+        }
         public decimal Price
         {
             get => _price;
-            private set
+            protected set
             {
                 if (value < 0)
                 {
@@ -26,7 +31,7 @@ namespace SigmaHomework
         public decimal Weight
         {
             get => _weight;
-            private set
+            protected set
             {
                 if (value <= 0)
                 {
@@ -38,7 +43,7 @@ namespace SigmaHomework
 
         public virtual void ChangePrice(decimal percent)
         {
-            Price -= Price * (percent / 100);
+            Price += Price * (percent / 100);
         }
         public override bool Equals(object? otherProduct)
         {
@@ -58,11 +63,32 @@ namespace SigmaHomework
                 $"Product price: {Price}\n" +
                 $"Product weight: {Weight}\n";
         }
+        public virtual void Parse(string stringToParse)
+        {
+            if (stringToParse == null || stringToParse.Split(' ').Length != 3)
+            {
+                throw new ArgumentException("Wrong string to parse!");
+            }
+            var arrayString = stringToParse.Split(' ');
+            Name = arrayString[0];
+            Price = decimal.Parse(arrayString[1]);
+            Weight = decimal.Parse(arrayString[2]);
+        }
+        public Product() : this("", 0.0m, 0.1m)
+        {
+
+        }
         public Product(string name, decimal price, decimal weight)
         {
             Name = name;
             Price = price;
             Weight = weight;
+        }
+        public void Deconstruct(out string name, out decimal price, out decimal weight)
+        {
+            name = Name;
+            price = Price;
+            weight = Weight;
         }
     }
 }

@@ -22,16 +22,16 @@ namespace SigmaHomework.Products
 
     public class Meat : Product
     {
-        public MeatCategory Category { get; }
-        public MeatType Type { get; }
+        public MeatCategory Category { get; private set; }
+        public MeatType Type { get; private set; }
 
         public override void ChangePrice(decimal percent)
         {
             var categoryPercent = Category switch
             {
-                MeatCategory.TopGrade => 0,
-                MeatCategory.FirstGrade => 3,
-                MeatCategory.SecondGrade => 5,
+                MeatCategory.TopGrade => 0m,
+                MeatCategory.FirstGrade => -3m,
+                MeatCategory.SecondGrade => -5m,
                 _ => throw new NotImplementedException()
             };
             base.ChangePrice(percent + categoryPercent);
@@ -54,11 +54,31 @@ namespace SigmaHomework.Products
                 $"Product category: {Category}\n" +
                 $"Product type: {Type}\n";
         }
+        public override void Parse(string stringToParse)
+        {
+            if (stringToParse == null || stringToParse.Split(' ').Length != 5)
+            {
+                throw new ArgumentException("Wrong string to parse!");
+            }
+            var splitedString = stringToParse.Split(' ');
+            base.Parse(string.Join(' ', splitedString[0..3]));
+            Category = (MeatCategory)Enum.Parse(typeof(MeatCategory), splitedString[3]);
+            Type = (MeatType)Enum.Parse(typeof(MeatType), splitedString[4]);
+        }
+        public Meat() : this("", 0.0m, 0.1m, default, default)
+        {
 
-        public Meat(MeatCategory category, MeatType type, string name, decimal price, decimal weight) : base(name, price, weight)
+        }
+        public Meat(string name, decimal price, decimal weight, MeatCategory category, MeatType type) : base(name, price, weight)
         {
             Category = category;
             Type = type;
+        }
+        public void Deconstruct(out string name, out decimal price, out decimal weight, out MeatCategory category, out MeatType type)
+        {
+            Deconstruct(out name, out price, out weight);
+            category = Category;
+            type = Type;
         }
     }
 }
