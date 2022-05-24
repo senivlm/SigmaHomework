@@ -10,7 +10,10 @@ namespace SigmaHomework
     public class Storage
     {
         private List<Product> _products;
-
+        public Storage(params Product[] products)
+        {
+            _products = products == null ? new List<Product>() : new List<Product>(products);
+        }
         public void AddDialogData()
         {
             Console.Write("Enter number of products you want to add to storage: ");
@@ -71,7 +74,7 @@ namespace SigmaHomework
         public Product this[int index]
         {
             get => index >= 0 && index < _products.Count ? _products[index] : throw new ArgumentOutOfRangeException();
-            private set
+            set
             {
                 if (index >= 0 && index < _products.Count)
                 {
@@ -79,9 +82,6 @@ namespace SigmaHomework
                 }
             }
         }
-        public Storage(params Product[] products)
-        {
-            _products = products == null ? new List<Product>() : new List<Product>(products);
-        }
+
     }
 }

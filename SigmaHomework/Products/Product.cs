@@ -40,7 +40,16 @@ namespace SigmaHomework
                 _weight = value;
             }
         }
+        public Product() : this("", 0.0m, 0.1m)
+        {
 
+        }
+        public Product(string name, decimal price, decimal weight)
+        {
+            Name = name;
+            Price = price;
+            Weight = weight;
+        }
         public virtual void ChangePrice(decimal percent)
         {
             Price += Price * (percent / 100);
@@ -74,16 +83,7 @@ namespace SigmaHomework
             Price = decimal.Parse(arrayString[1]);
             Weight = decimal.Parse(arrayString[2]);
         }
-        public Product() : this("", 0.0m, 0.1m)
-        {
-
-        }
-        public Product(string name, decimal price, decimal weight)
-        {
-            Name = name;
-            Price = price;
-            Weight = weight;
-        }
+        
         public void Deconstruct(out string name, out decimal price, out decimal weight)
         {
             name = Name;
