@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MatrixHomework
+namespace Task3
 {
     public class Vector
     {
@@ -28,12 +28,16 @@ namespace MatrixHomework
             }
             return true;
         }
-        public void ReverseArray()
+        public void MyReverseArray()
         {
             for (int i = 0; i < _array.Length / 2; i++)
             {
                 (_array[i], _array[^(i + 1)]) = (_array[^(i + 1)], _array[i]);
             }
+        }
+        public void BuiltInReverseArray()
+        {
+            _array = _array.Reverse().ToArray();
         }
         public void LongestSubarray()
         {

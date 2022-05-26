@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MatrixHomework
+namespace Task3
 {
     public class Pair
     {
