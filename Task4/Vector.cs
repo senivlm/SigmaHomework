@@ -79,7 +79,7 @@ namespace Task4
         public bool IsPalindrom()
         {
             for (int i = 0; i < _array.Length / 2; i++)
-            {
+            {// прохання пояснити цей код.
                 if (_array[i] != _array[^(i + 1)])
                 {
                     return false;
@@ -112,11 +112,13 @@ namespace Task4
                 }
                 count++;
                 if (count > longestCount)
-                {
+                {// Лишні присвоєння
                     longestCount = count;
                     longestNum = _array[i];
                 }
             }
+            // Не враховано випадок, коли найдовша послідовність буде знаходитись вкінці.
+            // роздрук тут лишній. Метод мав повернути параметри
             Console.WriteLine($"Number: {longestNum}, Subsequence length: {longestCount}");
         }
         public void InitShuffle()
