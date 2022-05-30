@@ -6,9 +6,11 @@
         {
             try
             {
-                Vector vector = new Vector(new int[] { 10, 5, 8, 9, 16, 6, 15, 12, 3 });
-
-                vector.Quicksort(PivotElement.First);
+                Vector vector = new Vector(1);
+                vector.ReadFromFile(@"D:\C# projects\SigmaHomework\Task4\ArrayInitializer.txt");
+                Console.WriteLine(vector);
+                //vector.QuickSort(PivotElement.First);
+                vector.MergeSort();
                 Console.WriteLine(vector);
             }
             catch (Exception ex)

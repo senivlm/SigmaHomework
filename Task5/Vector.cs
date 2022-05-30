@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Task4;
 
-namespace Task4
+namespace Task5
 {
     public enum PivotElement
     {
@@ -31,11 +30,15 @@ namespace Task4
         #region SortingAlgorithms
         public void QuickSort(PivotElement pivotElement)
         {
-            SortingAlgorithms.QuickSort(ref _array, 0, _array.Length - 1, pivotElement);
+            SortingAlgorithms.QuickSort(_array, 0, _array.Length - 1, pivotElement);
         }
         public void MergeSort()
         {
-            SortingAlgorithms.MergeSplitSort(ref _array, 0, _array.Length - 1);
+            _ = SortingAlgorithms.MergeSplitSort(_array, 0, _array.Length - 1);
+        }
+        public void HeapSort()
+        {
+            SortingAlgorithms.HeapSort(_array);
         }
         #endregion
 
@@ -43,7 +46,7 @@ namespace Task4
         public void ReadFromFile(string path)
         {
             using StreamReader streamReader = new StreamReader(path);
-            _array = streamReader.ReadLine().Split(' ').Select(s => int.Parse(s)).ToArray();
+            _array = streamReader.ReadLine().Split(' ',StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
         }
         public bool IsPalindrom()
         {
@@ -167,6 +170,6 @@ namespace Task4
                 }
             }
         }
-#endregion
+        #endregion
     }
 }
