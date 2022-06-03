@@ -12,6 +12,11 @@ namespace Task5
         First,
         Last
     }
+    public enum Order
+    {
+        Ascending = 1,
+        Descending = -1
+    }
     public class Vector
     {
         private int[] _array;
@@ -28,17 +33,35 @@ namespace Task5
         #endregion
 
         #region SortingAlgorithms
-        public void QuickSort(PivotElement pivotElement)
+        public void BubbleSort(Order order = Order.Ascending)
         {
+            SortingAlgorithms.OrderOfSorting = order;
+            SortingAlgorithms.BubbleSort(_array);
+        }
+        public void QuickSort(PivotElement pivotElement, Order order = Order.Ascending)
+        {
+            SortingAlgorithms.OrderOfSorting = order;
             SortingAlgorithms.QuickSort(_array, 0, _array.Length - 1, pivotElement);
         }
-        public void MergeSort()
+        public void QuickSortWithDuplicates(Order order = Order.Ascending)
         {
-            _ = SortingAlgorithms.MergeSplitSort(_array, 0, _array.Length - 1);
+            SortingAlgorithms.OrderOfSorting = order;
+            SortingAlgorithms.QuickSortWithDuplicates(_array, 0, _array.Length - 1);
         }
-        public void HeapSort()
+        public void MergeSort(Order order = Order.Ascending)
         {
+            SortingAlgorithms.OrderOfSorting = order;
+            SortingAlgorithms.MergeSplitSort(_array, 0, _array.Length - 1);
+        }
+        public void HeapSort(Order order = Order.Ascending)
+        {
+            SortingAlgorithms.OrderOfSorting = order;
             SortingAlgorithms.HeapSort(_array);
+        }
+        public void MergeSortFile(string path, Order order = Order.Ascending)
+        {
+            SortingAlgorithms.OrderOfSorting = order;
+            SortingAlgorithms.MergeSortFile(path);
         }
         #endregion
 
@@ -46,13 +69,13 @@ namespace Task5
         public void ReadFromFile(string path)
         {
             using StreamReader streamReader = new StreamReader(path);
-            _array = streamReader.ReadLine().Split(' ',StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+            _array = streamReader.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
         }
         public bool IsPalindrom()
         {
             for (int i = 0; i < _array.Length / 2; i++)
             {
-                if (_array[i] != _array[^(i + 1)])
+                if (_array[i] != _array[_array.Length - i - 1])
                 {
                     return false;
                 }
@@ -63,33 +86,31 @@ namespace Task5
         {
             for (int i = 0; i < _array.Length / 2; i++)
             {
-                (_array[i], _array[^(i + 1)]) = (_array[^(i + 1)], _array[i]);
+                (_array[i], _array[_array.Length - i - 1]) = (_array[_array.Length - i - 1], _array[i]);
             }
         }
         public void BuiltInReverseArray()
         {
             _array = _array.Reverse().ToArray();
         }
-        public void LongestSubarray()
+        public void LongestSubarray(out int longestNum, out int longestCount)
         {
             int count = 1;
-            int longestNum = _array[0];
-            int longestCount = 1;
+            longestNum = _array[0];
+            longestCount = 1;
 
-            for (int i = 1; i < _array.Length; i++)
+            for (int i = 0; i < _array.Length; i++, count++)
             {
-                if (_array[i] != _array[i - 1])
+                if (i == _array.Length - 1 || _array[i] != _array[i + 1])
                 {
+                    if (count > longestCount)
+                    {
+                        longestCount = count;
+                        longestNum = _array[i];
+                    }
                     count = 0;
                 }
-                count++;
-                if (count > longestCount)
-                {
-                    longestCount = count;
-                    longestNum = _array[i];
-                }
             }
-            Console.WriteLine($"Number: {longestNum}, Subsequence length: {longestCount}");
         }
         public void InitShuffle()
         {
@@ -98,7 +119,7 @@ namespace Task5
                 _array[i] = i + 1;
             }
             Random random = new Random();
-            int randomNumberOfTimes = new Random().Next(5, 10);
+            int randomNumberOfTimes = new Random().Next(15, 20);
             int random1, random2;
             for (int i = 0; i < randomNumberOfTimes; i++)
             {

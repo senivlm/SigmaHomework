@@ -8,8 +8,26 @@ namespace Task4
 {
     public static class SortingAlgorithms
     {
-        #region QuickSortAlgorithm
-        private static int Partition(ref int[] array, int left, int right, PivotElement pivotElement)
+        public static Order OrderOfSorting { get; set; } = Order.Ascending;
+
+        #region BubbleSort
+        public static void BubbleSort(int[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                for (int j = 0; j < array.Length - i - 1; j++)
+                {
+                    if (array[j].CompareTo(array[j + 1]) * (int)OrderOfSorting > 0)
+                    {
+                        (array[j], array[j + 1]) = (array[j + 1], array[j]);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region QuickSort
+        private static int Partition(int[] array, int left, int right, PivotElement pivotElement)
         {
             int pivot = pivotElement switch
             {
@@ -20,48 +38,65 @@ namespace Task4
             };
             while (true)
             {
-                while (array[left] < pivot)
+                while (array[left].CompareTo(pivot) * (int)OrderOfSorting < 0)
                 {
                     left++;
                 }
-                while (array[right] > pivot)
+                while (array[right].CompareTo(pivot) * (int)OrderOfSorting > 0)
                 {
                     right--;
                 }
-                if (left < right)
-                {
-                    if (array[left] == array[right])
-                    {
-                        return right;
-                    }
-                    (array[left], array[right]) = (array[right], array[left]);
-                }
-                else
+                if (left >= right)
                 {
                     return right;
                 }
+                (array[left], array[right]) = (array[right], array[left]);
             }
         }
-        public static void QuickSort(ref int[] array, int left, int right, PivotElement pivotElement)
+        public static void QuickSort(int[] array, int left, int right, PivotElement pivotElement)
         {
             if (left < right)
             {
-                int pivot = Partition(ref array, left, right, pivotElement);
+                int pivot = Partition(array, left, right, pivotElement);
+                QuickSort(array, left, pivot - 1, pivotElement);
+                QuickSort(array, pivot + 1, right, pivotElement);
+            }
+        }
 
-                if (pivot > 1)
+        private static void ThreeWayPartitioning(int[] array, int left, int right, out int leftEqual, out int rightEqual)
+        {
+            int pivot = array[left];
+            leftEqual = left;
+            rightEqual = right;
+
+            for (int iterator = leftEqual + 1; iterator <= rightEqual; iterator++)
+            {
+                if (array[iterator].CompareTo(pivot) * (int)OrderOfSorting < 0)
                 {
-                    QuickSort(ref array, left, pivot - 1, pivotElement);
+                    (array[iterator], array[leftEqual]) = (array[leftEqual], array[iterator]);
+                    leftEqual++;
                 }
-                if (pivot + 1 < right)
+                else if (array[iterator].CompareTo(pivot) * (int)OrderOfSorting > 0)
                 {
-                    QuickSort(ref array, pivot + 1, right, pivotElement);
+                    (array[iterator], array[rightEqual]) = (array[rightEqual], array[iterator]);
+                    rightEqual--;
+                    iterator--;
                 }
+            }
+        }
+        public static void QuickSortWithDuplicates(int[] arr, int left, int right)
+        {
+            if (left < right)
+            {
+                ThreeWayPartitioning(arr, left, right, out int leftEqual, out int rightEqual);
+                QuickSortWithDuplicates(arr, left, leftEqual - 1);
+                QuickSortWithDuplicates(arr, rightEqual + 1, right);
             }
         }
         #endregion
 
-        #region MergeSortAlgorithm
-        private static void Merge(ref int[] array, int left, int middle, int right)
+        #region MergeSort
+        private static void Merge(int[] array, int left, int middle, int right)
         {
             int firstPartStart = left;
             int secondPartStart = middle;
@@ -69,7 +104,7 @@ namespace Task4
             int[] temp = new int[right - left + 1];
             while (firstPartStart <= middle - 1 && secondPartStart <= right)
             {
-                if (array[firstPartStart] <= array[secondPartStart])
+                if (array[firstPartStart].CompareTo(array[secondPartStart]) * (int)OrderOfSorting <= 0)
                 {
                     temp[currentTemp++] = array[firstPartStart++];
                 }
@@ -91,14 +126,14 @@ namespace Task4
                 array[i + left] = temp[i];
             }
         }
-        public static void MergeSplitSort(ref int[] array, int left, int right)
+        public static void MergeSplitSort(int[] array, int left, int right)
         {
             if (left < right)
             {
                 int middle = (left + right) / 2;
-                MergeSplitSort(ref array, left, middle);
-                MergeSplitSort(ref array, middle + 1, right);
-                Merge(ref array, left, middle + 1, right);
+                MergeSplitSort(array, left, middle);
+                MergeSplitSort(array, middle + 1, right);
+                Merge(array, left, middle + 1, right);
             }
         }
         #endregion
