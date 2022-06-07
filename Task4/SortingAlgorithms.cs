@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Task4
 {
     public static class SortingAlgorithms
-    {
+    {// Тут сервісний клас доречний
         public static Order OrderOfSorting { get; set; } = Order.Ascending;
 
         #region BubbleSort
@@ -37,7 +37,7 @@ namespace Task4
                 _ => array[left]
             };
             while (true)
-            {
+            {// приведення до int погана ідея
                 while (array[left].CompareTo(pivot) * (int)OrderOfSorting < 0)
                 {
                     left++;
@@ -103,7 +103,7 @@ namespace Task4
             int currentTemp = 0;
             int[] temp = new int[right - left + 1];
             while (firstPartStart <= middle - 1 && secondPartStart <= right)
-            {
+            {//Що Вам дає виклик методу? Якщо б тип рередавався як параметр, то це б дало результат. А коли тип int, то це лишнє навантаження
                 if (array[firstPartStart].CompareTo(array[secondPartStart]) * (int)OrderOfSorting <= 0)
                 {
                     temp[currentTemp++] = array[firstPartStart++];
