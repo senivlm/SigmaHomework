@@ -152,7 +152,7 @@ namespace Task5
             int second = 0;
 
             while (!streamReader1.EndOfStream && !streamReader2.EndOfStream)
-            {
+            {//На кожній ітерації циклу перевіряти? Не доцільно!
                 if (isFirstIteration)
                 {
                     first = int.Parse(streamReader1.ReadLine());
