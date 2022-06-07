@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Task4;
 
 namespace Task4
-{
+{// Ваш номер 10.
     public enum PivotElement
     {
         Middle,
