@@ -47,13 +47,25 @@ namespace Task6.Problem1
             {
                 try
                 {
-                    Records[i] = new PersonData();
                     string? line = streamReader.ReadLine();
                     if (line == null)
                     {
                         throw new InvalidDataException("Impossible to parse!");
                     }
-                    Records[i].Parse(line);
+
+                    var record = new PersonData(line);
+
+                    var dates = record.GetMeterReadingDates().ToArray();
+
+                    for (int j = 0; j < dates.Length; j++)
+                    {
+                        if (dates[j].Month != (3 * (NumberOfQuarter - 1) + (j + 1)))
+                        {
+                            throw new InvalidDataException($"Invalid date number {j + 1} of reading the meter!");
+                        }
+                    }
+
+                    Records[i] = record;
                 }
                 catch (InvalidDataException ex)
                 {
@@ -66,8 +78,8 @@ namespace Task6.Problem1
         #region Methods
         public void PrintReportToFile(StreamWriter target)
         {
-            target.WriteLine($"Quarter number: {NumberOfQuarter}");
-            ReportCreator.WriteReportToFile(target, Records);
+
+            ReportCreator.WriteReportToFile(target, Records, NumberOfQuarter);
         }
         public void PrintReportToFile(string targetPath, bool append)
         {
@@ -77,9 +89,8 @@ namespace Task6.Problem1
 
         public void PrintRecordToFile(StreamWriter target, int apartmentNumber)
         {
-            target.WriteLine($"Quarter number: {NumberOfQuarter}");
             var apartmentInfo = Records?.Where(r => r?.ApartmentNumber == apartmentNumber);
-            ReportCreator.WriteReportToFile(target, apartmentInfo);
+            ReportCreator.WriteReportToFile(target, apartmentInfo, NumberOfQuarter);
         }
         public void PrintRecordToFile(string targetPath, bool append, int apartmentNumber)
         {
@@ -89,9 +100,16 @@ namespace Task6.Problem1
 
         public void PrintRecordWithLargestDebt(StreamWriter target)
         {
-            target.WriteLine($"Quarter number: {NumberOfQuarter}");
-            var recordWithLargestDebt = Records?.MaxBy(r => r.OutputIndication - r.InputIndication);
-            ReportCreator.WriteReportToFile(target, new PersonData[] { recordWithLargestDebt });
+            var recordWithLargestDebt = Records?.MaxBy(r =>
+            {
+                if (r != null)
+                {
+                    var indications = r.GetMeterIndications().ToArray();
+                    return indications[3] - indications[0];
+                }
+                return 0;
+            });
+            ReportCreator.WriteReportToFile(target, new PersonData[] { recordWithLargestDebt }, NumberOfQuarter);
         }
         public void PrintRecordWithLargestDebt(string targetPath, bool append)
         {
@@ -101,9 +119,16 @@ namespace Task6.Problem1
 
         public void PrintRecordsWithoutElectricityUsage(StreamWriter target)
         {
-            target.WriteLine($"Quarter number: {NumberOfQuarter}");
-            var recordsWithoutElectricityUsage = Records?.Where(r => r.OutputIndication - r.InputIndication == 0);
-            ReportCreator.WriteReportToFile(target, recordsWithoutElectricityUsage);
+            var recordsWithoutElectricityUsage = Records?.Where(r =>
+            {
+                if (r != null)
+                {
+                    var indications = r.GetMeterIndications().ToArray();
+                    return (indications[3] - indications[0]) == 0;
+                }
+                return false;
+            });
+            ReportCreator.WriteReportToFile(target, recordsWithoutElectricityUsage, NumberOfQuarter);
         }
         public void PrintRecordsWithoutElectricityUsage(string targetPath, bool append)
         {

@@ -21,7 +21,7 @@ namespace Task7
             LogAnalyser logAnalyser = new LogAnalyser(@"D:\C# projects\SigmaHomework\Task7\ErrorLog.txt",
                 @"D:\C# projects\SigmaHomework\Task7\StorageDB.txt");
 
-            logAnalyser.UpdateRecordAfterSpecifiedDate(new DateOnly(2022, 6, 6));
+            logAnalyser.UpdateRecordAfterSpecifiedDate(new DateOnly(2022, 6, 5));
 
             Console.ReadLine();
         }

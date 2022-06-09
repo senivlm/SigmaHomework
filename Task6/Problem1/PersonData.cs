@@ -8,21 +8,40 @@ namespace Task6.Problem1
 {
     public class PersonData
     {
-        public string Surname { get; private set; }
-        public int ApartmentNumber { get; private set; }
-        public int InputIndication { get; private set; }
-        public int OutputIndication { get; private set; }
-        public readonly DateOnly[] MeterReadingDate = new DateOnly[3];
+        public string Surname { get; private set; } = "";
+        public int ApartmentNumber { get; private set; } = 0;
+        private int[] MeterIndications = new int[4];
+        private DateOnly[] MeterReadingDate = new DateOnly[3];
 
         #region Constructors
-        public PersonData() : this("", 0, 0, 0, default, default, default) { }
-        public PersonData(string surname, int apartmentNumber, int inputIndication, int outputIndication, params DateOnly[] meterReadingDate)
+        public PersonData() { }
+        public PersonData(string lineToParse)
+        {
+            Parse(lineToParse);
+        }
+        public PersonData(string surname, int apartmentNumber, int[] meterIndications, DateOnly[] meterReadingDate)
         {
             Surname = surname ?? "";
             ApartmentNumber = apartmentNumber;
-            InputIndication = inputIndication;
-            OutputIndication = outputIndication;
-            for (int i = 0; i < meterReadingDate.Length; i++)
+
+            if (MeterIndications.Length != 4)
+            {
+                throw new ArgumentException("Invalid number of meter indications!");
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (meterIndications[i] < 0 || (i != 0 && meterIndications[i - 1] > meterIndications[i]))
+                {
+                    throw new InvalidDataException($"Invalid meter indication number {i + 1}");
+                }
+                MeterIndications[i] = meterIndications[i];
+            }
+
+            if (MeterReadingDate.Length != 3)
+            {
+                throw new ArgumentException("Invalid number of meter reading dates!");
+            }
+            for (int i = 0; i < 3; i++)
             {
                 MeterReadingDate[i] = meterReadingDate[i];
             }
@@ -30,52 +49,55 @@ namespace Task6.Problem1
         #endregion
 
         #region Methods
+        public IReadOnlyCollection<int> GetMeterIndications() => Array.AsReadOnly(MeterIndications);
+        public IReadOnlyCollection<DateOnly> GetMeterReadingDates() => Array.AsReadOnly(MeterReadingDate);
         public void Parse(string stringToParse)
         {
             var personData = stringToParse.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (personData.Length != 7)
+
+            if (personData.Length != 9)
             {
                 throw new InvalidDataException("Inсorrect number of arguments!");
             }
+
             if (!int.TryParse(personData[0], out int apartmentNumber))
             {
                 throw new InvalidDataException("Invalid apartment number!");
             }
-            ApartmentNumber = apartmentNumber;
-            Surname = personData[1];
-            if (!int.TryParse(personData[2], out int inputIndication))
+
+            for (int i = 2; i < 6; i++)
             {
-                throw new InvalidDataException("Invalid input indicator of meter!");
+                if (!int.TryParse(personData[i], out int indication) ||
+                    indication < 0 ||
+                    (i != 2 && MeterIndications[i - 3] > indication))
+                {
+                    throw new InvalidDataException($"Invalid meter indication number {i - 1}!");
+                }
+                MeterIndications[i - 2] = indication;
             }
-            InputIndication = inputIndication;
-            if (!int.TryParse(personData[3], out int outputIndication))
-            {
-                throw new InvalidDataException("Invalid output indicator of meter!");
-            }
-            OutputIndication = outputIndication;
-            for (int i = 4; i < 7; i++)
+
+            for (int i = 6; i < 9; i++)
             {
                 if (!DateOnly.TryParse(personData[i], out DateOnly date))
                 {
-                    throw new InvalidDataException($"Invalid date number {i - 3} of reading the meter!");
+                    throw new InvalidDataException($"Invalid date number {i - 5} of reading the meter!");
                 }
-                MeterReadingDate[i - 4] = date;
+                MeterReadingDate[i - 6] = date;
             }
+
+            ApartmentNumber = apartmentNumber;
+            Surname = personData[1];
         }
         public override int GetHashCode()
         {
             return ApartmentNumber.GetHashCode() ^
-                Surname.GetHashCode() ^
-                InputIndication.GetHashCode() ^
-                OutputIndication.GetHashCode();
+                Surname.GetHashCode();
         }
         public override bool Equals(object? obj)
         {
             PersonData data = (PersonData)obj;
             return ApartmentNumber.Equals(data.ApartmentNumber) &&
-                Surname.Equals(data.Surname) &&
-                InputIndication.Equals(data.InputIndication) &&
-                OutputIndication.Equals(data.OutputIndication);
+                Surname.Equals(data.Surname);
         }
         #endregion
     }

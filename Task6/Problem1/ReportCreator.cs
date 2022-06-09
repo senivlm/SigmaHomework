@@ -10,18 +10,22 @@ namespace Task6.Problem1
 {
     public static class ReportCreator
     {
-        public static void WriteReportToFile(StreamWriter target, IEnumerable<PersonData>? data)
+        public static void WriteReportToFile(StreamWriter target, IEnumerable<PersonData>? data, int numberOfQuarter)
         {
+            target.WriteLine($"Quarter number: {numberOfQuarter}");
+
             var table = new ConsoleTable(new ConsoleTableOptions
             {
                 Columns = new[] {
+                    "Record number",
                     "Apartment number",
                     "Surname of the apartment owner",
-                    "Input reading of the electric meter",
-                    "Output reading of the electric meter",
-                    "Meter reading date for the first month of the quarter",
-                    "Meter reading date for the second month of the quarter",
-                    "Meter reading date for the third month of the quarter"
+                    $"Used electricity for {new DateTimeFormatInfo().GetMonthName(3*(numberOfQuarter-1)+1)}",
+                    $"Used electricity for {new DateTimeFormatInfo().GetMonthName(3*(numberOfQuarter-1)+2)}",
+                    $"Used electricity for {new DateTimeFormatInfo().GetMonthName(3*(numberOfQuarter-1)+3)}",
+                    $"Meter reading date for {new DateTimeFormatInfo().GetMonthName(3*(numberOfQuarter-1)+1)}",
+                    $"Meter reading date for {new DateTimeFormatInfo().GetMonthName(3*(numberOfQuarter-1)+2)}",
+                    $"Meter reading date for {new DateTimeFormatInfo().GetMonthName(3*(numberOfQuarter-1)+3)}"
                 },
                 EnableCount = false,
                 NumberAlignment = Alignment.Left
@@ -29,18 +33,26 @@ namespace Task6.Problem1
 
             if (data != null)
             {
+                var recordNumber = 1;
                 foreach (var record in data)
                 {
-                    if (record != null && !record.Equals(new PersonData()))
+                    if (record != null)
                     {
+                        var indications = record.GetMeterIndications().ToArray();
+                        var dates = record.GetMeterReadingDates().ToArray();
+
                         table.AddRow(
+                            recordNumber,
                             record.ApartmentNumber,
                             record.Surname,
-                            $"{record.InputIndication} kWh",
-                            $"{record.OutputIndication} kWh",
-                            record.MeterReadingDate[0].ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en")),
-                            record.MeterReadingDate[1].ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en")),
-                            record.MeterReadingDate[2].ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en")));//uk-UA - ukrainian culture
+                            $"{indications[1] - indications[0]} kWh",
+                            $"{indications[2] - indications[1]} kWh",
+                            $"{indications[3] - indications[2]} kWh",
+                            dates[0].ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en")),
+                            dates[1].ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en")),
+                            dates[2].ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en")));//uk-UA - ukrainian culture
+
+                        recordNumber++;
                     }
                 }
             }
@@ -54,6 +66,7 @@ namespace Task6.Problem1
             var table = new ConsoleTable(new ConsoleTableOptions
             {
                 Columns = new[] {
+                    "Record number",
                     "Apartment number",
                     "Surname of the apartment owner",
                     "Electricity consumption for the current quarter",
@@ -65,15 +78,21 @@ namespace Task6.Problem1
 
             if (data != null)
             {
+                var recordNumber = 1;
                 foreach (var record in data)
                 {
-                    if (record != null && !record.Equals(new PersonData()))
+                    if (record != null)
                     {
+                        var indications = record.GetMeterIndications().ToArray();
+
                         table.AddRow(
+                            recordNumber,
                             record.ApartmentNumber,
                             record.Surname,
-                            $"{record.OutputIndication - record.InputIndication} kWh",
-                            $"{(record.OutputIndication - record.InputIndication) * kilowattPerHourPrice} UAH");
+                            $"{indications[3] - indications[0]} kWh",
+                            $"{(indications[3] - indications[0]) * kilowattPerHourPrice} UAH");
+
+                        recordNumber++;
                     }
                 }
             }
@@ -85,6 +104,7 @@ namespace Task6.Problem1
             var table = new ConsoleTable(new ConsoleTableOptions
             {
                 Columns = new[] {
+                    "Record number",
                     "Apartment number",
                     "Surname of the apartment owner",
                     "Days have passed since the last time the meter was read"
@@ -95,14 +115,20 @@ namespace Task6.Problem1
 
             if (data != null)
             {
+                var recordNumber = 1;
                 foreach (var record in data)
                 {
-                    if (record != null && !record.Equals(new PersonData()))
+                    if (record != null)
                     {
+                        var dates = record.GetMeterReadingDates().ToArray();
+
                         table.AddRow(
+                            recordNumber,
                             record.ApartmentNumber,
                             record.Surname,
-                            (DateTime.Now - record.MeterReadingDate[2].ToDateTime(new TimeOnly())).Days);
+                            (DateTime.Now - dates[2].ToDateTime(new TimeOnly())).Days);
+
+                        recordNumber++;
                     }
                 }
             }

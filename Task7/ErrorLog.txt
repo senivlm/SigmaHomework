@@ -1,20 +1,4 @@
-﻿ArgumentNullException: Value cannot be null. (Parameter 'Invalid type parameter!') Line: Product apples 23.97 1,0 Inspection date: 06.06.2022 17:44:15
-ArgumentNullException: Value cannot be null. (Parameter 'Invalid type parameter!') Line: Product Apples 23,97 1.0 Inspection date: 06.06.2022 17:44:15
-ArgumentNullException: Value cannot be null. (Parameter 'Invalid type parameter!') Line: Product Cola 33.99 1.0 Inspection date: 06.06.2022 17:44:15
-ArgumentNullException: Value cannot be null. (Parameter 'Invalid type parameter!') Line: Meat Chicken 45.90 1.0 topgrade chicken Inspection date: 06.06.2022 17:44:15
-ArgumentNullException: Value cannot be null. (Parameter 'Invalid type parameter!') Line: DairyProduct Milk 32.00 0.5 7 Inspection date: 06.06.2022 17:44:15
-FormatException: Invalid product price! Line: Product apples 23.97 1,0 Inspection date: 06.06.2022 17:54:39
-FormatException: Invalid product weight! Line: Product Apples 23,97 1.0 Inspection date: 06.06.2022 17:54:39
-FormatException: Invalid product price! Line: Product Cola 33.99 1.0 Inspection date: 06.06.2022 17:54:39
-FormatException: Invalid product price! Line: Meat Chicken 45.90 1.0 topgrade chicken Inspection date: 06.06.2022 17:54:39
-FormatException: Invalid product price! Line: DairyProduct Milk 32.00 0.5 7 Inspection date: 06.06.2022 17:54:39
-FormatException: Invalid product price! Line: Product apples 23.97 1,0 Inspection date: 06.06.2022 17:58:11
-FormatException: Invalid product weight! Line: Product Apples 23,97 1.0 Inspection date: 06.06.2022 17:58:11
-FormatException: Invalid product price! Line: Product Cola 33.99 1.0 Inspection date: 06.06.2022 17:58:11
-FormatException: Invalid product price! Line: Meat Chicken 45.90 1.0 topgrade chicken Inspection date: 06.06.2022 17:58:11
-FormatException: Invalid product price! Line: DairyProduct Milk 32.00 0.5 7 Inspection date: 06.06.2022 17:58:11
-FormatException: Invalid product weight! Line: Product apples 23.97 1,0 Inspection date: 06.06.2022 21:12:02
-ArgumentException: Incorrect number of arguments for product! Line: Product Cola 33.99  Inspection date: 06.06.2022 21:23:22
+﻿ArgumentException: Incorrect number of arguments for product! Line: Product Cola 33.99  Inspection date: 06.06.2022 21:23:22
 FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:27:10
 FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:29:35
 ArgumentException: Incorrect number of arguments for product! Line: Product Apples 23,97  Inspection date: 06.06.2022 21:31:03

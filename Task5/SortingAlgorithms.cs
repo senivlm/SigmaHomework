@@ -17,7 +17,8 @@ namespace Task5
             {
                 for (int j = 0; j < array.Length - i - 1; j++)
                 {
-                    if (array[j].CompareTo(array[j + 1]) * (int)OrderOfSorting > 0)
+                    if ((array[j] > array[j + 1] && OrderOfSorting == Order.Ascending) ||
+                        (array[j] < array[j + 1] && OrderOfSorting == Order.Descending))
                     {
                         (array[j], array[j + 1]) = (array[j + 1], array[j]);
                     }
@@ -38,11 +39,13 @@ namespace Task5
             };
             while (true)
             {
-                while (array[left].CompareTo(pivot) * (int)OrderOfSorting < 0)
+                while ((array[left] < pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[left] > pivot && OrderOfSorting == Order.Descending))
                 {
                     left++;
                 }
-                while (array[right].CompareTo(pivot) * (int)OrderOfSorting > 0)
+                while ((array[right] > pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[right] < pivot && OrderOfSorting == Order.Descending))
                 {
                     right--;
                 }
@@ -71,12 +74,14 @@ namespace Task5
 
             for (int iterator = leftEqual + 1; iterator <= rightEqual; iterator++)
             {
-                if (array[iterator].CompareTo(pivot) * (int)OrderOfSorting < 0)
+                if ((array[iterator] < pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[iterator] > pivot && OrderOfSorting == Order.Descending))
                 {
                     (array[iterator], array[leftEqual]) = (array[leftEqual], array[iterator]);
                     leftEqual++;
                 }
-                else if (array[iterator].CompareTo(pivot) * (int)OrderOfSorting > 0)
+                else if ((array[iterator] > pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[iterator] < pivot && OrderOfSorting == Order.Descending))
                 {
                     (array[iterator], array[rightEqual]) = (array[rightEqual], array[iterator]);
                     rightEqual--;
@@ -104,7 +109,8 @@ namespace Task5
             int[] temp = new int[right - left + 1];
             while (firstPartStart <= middle - 1 && secondPartStart <= right)
             {
-                if (array[firstPartStart].CompareTo(array[secondPartStart]) * (int)OrderOfSorting <= 0)
+                if ((array[firstPartStart] <= array[secondPartStart] && OrderOfSorting == Order.Ascending) ||
+                    (array[firstPartStart] >= array[secondPartStart] && OrderOfSorting == Order.Descending))
                 {
                     temp[currentTemp++] = array[firstPartStart++];
                 }
@@ -147,38 +153,37 @@ namespace Task5
             using var streamReader2 = new StreamReader(file2);
             using var streamWriter = new StreamWriter(targetFile, false);
 
-            bool isElementInFirstFile = false, isFirstIteration = true;
+            bool isElementInFirstFile = false;
             int first = 0;
             int second = 0;
 
-            while (!streamReader1.EndOfStream && !streamReader2.EndOfStream)
+            if (!streamReader1.EndOfStream && !streamReader2.EndOfStream)
             {
-                if (isFirstIteration)
-                {
-                    first = int.Parse(streamReader1.ReadLine());
-                    second = int.Parse(streamReader2.ReadLine());
-                    isFirstIteration = false;
-                }
-                else if (isElementInFirstFile)
-                {
-                    first = int.Parse(streamReader1.ReadLine());
-                }
-                else
-                {
-                    second = int.Parse(streamReader2.ReadLine());
-                }
-                if (first.CompareTo(second) * (int)OrderOfSorting <= 0)
-                {
-                    streamWriter.Write($"{first} ");
-                    isElementInFirstFile = true;
-                }
-                else
-                {
-                    streamWriter.Write($"{second} ");
-                    isElementInFirstFile = false;
-                }
-            }
+                first = int.Parse(streamReader1.ReadLine());
 
+                do
+                {
+                    if (isElementInFirstFile)
+                    {
+                        first = int.Parse(streamReader1.ReadLine());
+                    }
+                    else
+                    {
+                        second = int.Parse(streamReader2.ReadLine());
+                    }
+                    if ((first <= second && OrderOfSorting == Order.Ascending) ||
+                        (first >= second && OrderOfSorting == Order.Descending))
+                    {
+                        streamWriter.Write($"{first} ");
+                        isElementInFirstFile = true;
+                    }
+                    else
+                    {
+                        streamWriter.Write($"{second} ");
+                        isElementInFirstFile = false;
+                    }
+                } while (!streamReader1.EndOfStream && !streamReader2.EndOfStream);
+            }
             streamWriter.Write($"{(isElementInFirstFile ? second : first)} ");
 
             while (!streamReader1.EndOfStream)
@@ -260,11 +265,15 @@ namespace Task5
             var rightChildIndex = 2 * parentIndex + 2;
             int maxNumberIndex = parentIndex;
 
-            if (leftChildIndex < heapSize && array[leftChildIndex].CompareTo(array[maxNumberIndex]) * (int)OrderOfSorting > 0)
+            if (leftChildIndex < heapSize &&
+                ((array[leftChildIndex] > array[maxNumberIndex] && OrderOfSorting == Order.Ascending) ||
+                (array[leftChildIndex] < array[maxNumberIndex] && OrderOfSorting == Order.Descending)))
             {
                 maxNumberIndex = leftChildIndex;
             }
-            if (rightChildIndex < heapSize && array[rightChildIndex].CompareTo(array[maxNumberIndex]) * (int)OrderOfSorting > 0)
+            if (rightChildIndex < heapSize &&
+                ((array[rightChildIndex] > array[maxNumberIndex] && OrderOfSorting == Order.Ascending) ||
+                (array[rightChildIndex] < array[maxNumberIndex] && OrderOfSorting == Order.Descending)))
             {
                 maxNumberIndex = rightChildIndex;
             }

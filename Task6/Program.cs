@@ -19,6 +19,8 @@ namespace Task6
                 Console.WriteLine(ex.Message);
             }
 
+            PersonData data = new PersonData();
+
             Console.WriteLine("Printing all report to file...");
             quarter.PrintReportToFile(@"D:\C# projects\SigmaHomework\Task6\Problem1\UserFriendlyReport.txt", false);
             Console.WriteLine("Success!");

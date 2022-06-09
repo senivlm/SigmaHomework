@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task7.Purchase
 {
-    public static class Check
+    public class Check
     {
-        public static void OutputPurchaseInformation(Buy purchase)
+        public void ViewerBuy(Buy purchase)
         {
             Console.WriteLine(purchase);
         }

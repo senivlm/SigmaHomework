@@ -17,7 +17,8 @@ namespace Task4
             {
                 for (int j = 0; j < array.Length - i - 1; j++)
                 {
-                    if (array[j].CompareTo(array[j + 1]) * (int)OrderOfSorting > 0)
+                    if ((array[j] > array[j + 1] && OrderOfSorting == Order.Ascending) ||
+                        (array[j] < array[j + 1] && OrderOfSorting == Order.Descending))
                     {
                         (array[j], array[j + 1]) = (array[j + 1], array[j]);
                     }
@@ -38,11 +39,13 @@ namespace Task4
             };
             while (true)
             {
-                while (array[left].CompareTo(pivot) * (int)OrderOfSorting < 0)
+                while ((array[left] < pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[left] > pivot && OrderOfSorting == Order.Descending))
                 {
                     left++;
                 }
-                while (array[right].CompareTo(pivot) * (int)OrderOfSorting > 0)
+                while ((array[right] > pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[right] < pivot && OrderOfSorting == Order.Descending))
                 {
                     right--;
                 }
@@ -71,12 +74,14 @@ namespace Task4
 
             for (int iterator = leftEqual + 1; iterator <= rightEqual; iterator++)
             {
-                if (array[iterator].CompareTo(pivot) * (int)OrderOfSorting < 0)
+                if ((array[iterator] < pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[iterator] > pivot && OrderOfSorting == Order.Descending))
                 {
                     (array[iterator], array[leftEqual]) = (array[leftEqual], array[iterator]);
                     leftEqual++;
                 }
-                else if (array[iterator].CompareTo(pivot) * (int)OrderOfSorting > 0)
+                else if ((array[iterator] > pivot && OrderOfSorting == Order.Ascending) ||
+                    (array[iterator] < pivot && OrderOfSorting == Order.Descending))
                 {
                     (array[iterator], array[rightEqual]) = (array[rightEqual], array[iterator]);
                     rightEqual--;
@@ -104,7 +109,8 @@ namespace Task4
             int[] temp = new int[right - left + 1];
             while (firstPartStart <= middle - 1 && secondPartStart <= right)
             {
-                if (array[firstPartStart].CompareTo(array[secondPartStart]) * (int)OrderOfSorting <= 0)
+                if ((array[firstPartStart] <= array[secondPartStart] && OrderOfSorting == Order.Ascending) ||
+                    (array[firstPartStart] >= array[secondPartStart] && OrderOfSorting == Order.Descending))
                 {
                     temp[currentTemp++] = array[firstPartStart++];
                 }

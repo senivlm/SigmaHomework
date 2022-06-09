@@ -19,7 +19,7 @@ namespace Task5
                 vector.InitRand(-15, 15);
                 Console.WriteLine($"Unsorted array: {vector}");
 
-                vector.HeapSort(Order.Descending);//Heap sort
+                vector.HeapSort(Order.Ascending);//Heap sort
                 Console.WriteLine($"Sorted with HeapSort array in {SortingAlgorithms.OrderOfSorting} order: {vector}");
 
                 /*string myString = "Hello my beautiful world! SigmaSoftware";
