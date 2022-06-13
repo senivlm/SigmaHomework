@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Task6.Problem1
-{
+{// Інформацію про персону і про заміри краще розділяти в різні класи.
     public class PersonData
     {
         public string Surname { get; private set; } = "";
@@ -20,12 +20,12 @@ namespace Task6.Problem1
             Parse(lineToParse);
         }
         public PersonData(string surname, int apartmentNumber, int[] meterIndications, DateOnly[] meterReadingDate)
-        {
+        {// Валідацію даних краще винести в інший файл.
             Surname = surname ?? "";
             ApartmentNumber = apartmentNumber;
 
             if (MeterIndications.Length != 4)
-            {
+            {// Виняток краще породити свій. Можна гнучкіше перехоплювати.
                 throw new ArgumentException("Invalid number of meter indications!");
             }
             for (int i = 0; i < 4; i++)
@@ -52,7 +52,7 @@ namespace Task6.Problem1
         public IReadOnlyCollection<int> GetMeterIndications() => Array.AsReadOnly(MeterIndications);
         public IReadOnlyCollection<DateOnly> GetMeterReadingDates() => Array.AsReadOnly(MeterReadingDate);
         public void Parse(string stringToParse)
-        {
+        {// тут теж!!!
             var personData = stringToParse.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             if (personData.Length != 9)
