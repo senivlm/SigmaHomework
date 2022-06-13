@@ -177,6 +177,39 @@ namespace Task4
                 }
             }
         }
+        public static Vector operator +(Vector a, Vector b)
+        {
+            Vector minVector = a._array.Length > b._array.Length ? b : a;
+            Vector vector = new Vector(a._array.Length > b._array.Length ? a._array : b._array);
+
+            for (int i = 0; i < minVector._array.Length; i++)
+            {
+                vector[i] += minVector[i];
+            }
+
+            return vector;
+        }
+        public static Vector operator +(Vector a, int b)
+        {
+            Vector vector = new Vector(a._array);
+
+            for (int i = 0; i < vector._array.Length; i++)
+            {
+                vector[i] += b;
+            }
+
+            return vector;
+        }
+        public static bool operator >(Vector a, Vector b) => a._array.Length > b._array.Length;
+        public static bool operator <(Vector a, Vector b) => a._array.Length < b._array.Length;
+        public static explicit operator int(Vector vector)
+        {
+            return vector._array[0];
+        }
+        public static implicit operator Vector(int element)
+        {
+            return new Vector(new int[] { element });
+        }
         #endregion
     }
 }

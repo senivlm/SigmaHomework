@@ -53,15 +53,16 @@ namespace Task6.Problem2
             var punctuation = Text
                 .Where(char.IsPunctuation)
                 .Distinct()
-                .ToArray();
+                .ToArray();//Get all punctuation from text
             for (int i = 0; i < sentences.Length; i++)
             {
                 Console.WriteLine($"Sentence number {i + 1}");
 
                 var words = Regex
-                    .Split(sentences[i], @"\d*\s+\d*")
-                    .Select(w => w.Trim(punctuation))
-                    .Where(w => w != "")
+                    .Split(sentences[i], @"\d*\s+\d*")//Split sentence by space symbol (i think that digit is not a word,
+                                                      //so i splited also by digits)
+                    .Select(w => w.Trim(punctuation))//Trim punctuation signs on words
+                    .Where(w => w != "")//Delete all "empty" words
                     .Distinct();
 
                 var longestWords = string

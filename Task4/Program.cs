@@ -31,6 +31,21 @@
 
                 vector.MergeSort(Order.Descending);//Merge sort
                 Console.WriteLine($"Sorted with MergeSort array in {SortingAlgorithms.OrderOfSorting} order: {vector}");
+
+                /*Vector vector1 = new Vector(5);
+                vector1.InitRand(-15, 15);
+                Console.WriteLine($"a = {vector1}");
+
+                Vector vector2 = new Vector(15);
+                vector2.InitRand(-15, 15);
+                Console.WriteLine($"b = {vector2}");
+
+                int value = 5;
+                vector1 += value;
+
+                int value1 = (int)vector1;
+
+                Console.WriteLine($"c = {vector1 + vector2}");*/
             }
             catch (Exception ex)
             {

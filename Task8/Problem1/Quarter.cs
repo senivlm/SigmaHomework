@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleTables;
 
-namespace Task6.Problem1
+namespace Task8.Problem1
 {
     public class Quarter
     {
@@ -23,7 +23,7 @@ namespace Task6.Problem1
                 _kilowattPerHourPrice = value;
             }
         }
-        public int NumberOfQuarter { get; }
+        public int NumberOfQuarter { get; private set; }
         private PersonData[] Records;
 
         #region Constructors
@@ -76,6 +76,67 @@ namespace Task6.Problem1
         #endregion
 
         #region Methods
+        public static IEnumerable<PersonData> operator +(Quarter firstQuarter, Quarter secondQuarter)
+        {
+
+            if (firstQuarter == null)
+            {
+                return secondQuarter.Records;
+            }
+            if (secondQuarter == null)
+            {
+                return firstQuarter.Records;
+            }
+
+            return firstQuarter.Records.Concat(secondQuarter.Records);//Option to implement if you want to return the collection,
+                                                                      //not a new object. In this case, you can add data from different
+                                                                      //quarters of the year
+            
+            /*if (firstQuarter == null)//One of possible realizations (operator should return object of type Quarter)
+            {
+                return secondQuarter;
+            }
+            if (secondQuarter == null)
+            {
+                return firstQuarter;
+            }
+
+            if (firstQuarter.Equals(secondQuarter))//I think that the possibility of adding information from two classes of
+                                                   //electricity metering for a certain quarter of the year should be possible only
+                                                   //if the electricity indicators were taken in the same quarter of the year
+                                                   //and in both objects the price for electricity is the same
+            {
+                return new Quarter()
+                {
+                    NumberOfQuarter = firstQuarter.NumberOfQuarter,
+                    KilowattPerHourPrice = firstQuarter.KilowattPerHourPrice,
+                    Records = firstQuarter.Records.Union(secondQuarter.Records).ToArray()
+                };
+            }
+            return firstQuarter;*/
+        }
+        public static Quarter operator -(Quarter firstQuarter, Quarter secondQuarter)
+        {
+            if (firstQuarter != null && secondQuarter != null)
+            {
+                firstQuarter.Records = firstQuarter.Records.Except(secondQuarter.Records).ToArray();
+            }
+            return firstQuarter;
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj != null && obj is Quarter quarter)
+            {
+                return NumberOfQuarter.Equals(quarter.NumberOfQuarter) &&
+                    KilowattPerHourPrice.Equals(quarter.KilowattPerHourPrice);
+            }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return NumberOfQuarter.GetHashCode() ^
+                KilowattPerHourPrice.GetHashCode();
+        }
         public void PrintReportToFile(StreamWriter target)
         {
             ReportCreator.WriteReportToFile(target, Records, NumberOfQuarter);

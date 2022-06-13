@@ -26,7 +26,7 @@ namespace Task6
             Console.WriteLine("Success!");
             Console.ReadLine();
 
-            Console.WriteLine("Printing report for specific apartment...");
+            Console.WriteLine("Printing report for specific apartment (apartment number 31)...");
             quarter.PrintRecordToFile(@"D:\C# projects\SigmaHomework\Task6\Problem1\UserFriendlyReport.txt", false, 31);
             Console.WriteLine("Success!");
             Console.ReadLine();
