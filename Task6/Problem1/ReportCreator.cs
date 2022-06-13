@@ -9,7 +9,7 @@ using ConsoleTables;
 namespace Task6.Problem1
 {
     public static class ReportCreator
-    {
+    {//хороша робота!
         public static void WriteReportToFile(StreamWriter target, IEnumerable<PersonData>? data, int numberOfQuarter)
         {
             target.WriteLine($"Quarter number: {numberOfQuarter}");
