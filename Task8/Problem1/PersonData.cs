@@ -9,8 +9,7 @@ namespace Task8.Problem1
 {
     public class PersonData
     {
-        public string Surname { get; private set; } = "";
-        public int ApartmentNumber { get; private set; } = 0;
+        public Owner Owner { get; private set; } = new Owner();
         private int[] MeterIndications = new int[4];
         private DateOnly[] MeterReadingDate = new DateOnly[3];
 
@@ -20,32 +19,15 @@ namespace Task8.Problem1
         {
             Parse(lineToParse);
         }
-        public PersonData(string surname, int apartmentNumber, int[] meterIndications, DateOnly[] meterReadingDate)
+        public PersonData(Owner owner, int[] meterIndications, DateOnly[] meterReadingDate)
         {
-            Surname = surname ?? "";
-            ApartmentNumber = apartmentNumber;
-
-            if (MeterIndications.Length != 4)
+            if (!ValidationService.IsPersonDataValid(meterIndications, meterReadingDate, out Exception? exception))
             {
-                throw new ArgumentException("Invalid number of meter indications!");
+                throw exception!;
             }
-            for (int i = 0; i < 4; i++)
-            {
-                if (meterIndications[i] < 0 || (i != 0 && meterIndications[i - 1] > meterIndications[i]))
-                {
-                    throw new InvalidDataException($"Invalid meter indication number {i + 1}");
-                }
-                MeterIndications[i] = meterIndications[i];
-            }
-
-            if (MeterReadingDate.Length != 3)
-            {
-                throw new ArgumentException("Invalid number of meter reading dates!");
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                MeterReadingDate[i] = meterReadingDate[i];
-            }
+            Owner = owner;
+            Array.Copy(meterIndications, MeterIndications, MeterIndications.Length);
+            Array.Copy(meterReadingDate, MeterReadingDate, MeterReadingDate.Length);
         }
         #endregion
 
@@ -85,28 +67,23 @@ namespace Task8.Problem1
                 }
                 MeterReadingDate[i - 6] = date;
             }
-
-            ApartmentNumber = apartmentNumber;
-            Surname = personData[1];
+            Owner = new Owner(personData[1], apartmentNumber);
         }
         public override int GetHashCode()
         {
-            return ApartmentNumber.GetHashCode() ^
-                Surname.GetHashCode();
+            return Owner.GetHashCode();
         }
         public override bool Equals(object? obj)
         {
             if (obj != null && obj is PersonData data)
             {
-                return ApartmentNumber.Equals(data.ApartmentNumber) &&
-                    Surname.Equals(data.Surname);
+                return Owner.Equals(data.Owner);
             }
             return false;
         }
         public override string ToString()
         {
-            var result = $"Apartment number: {ApartmentNumber}\n" +
-                $"Surname of the apartment owner: {Surname}\n";
+            var result = Owner.ToString();
 
             for (int i = 0; i < MeterIndications.Length - 1; i++)
             {

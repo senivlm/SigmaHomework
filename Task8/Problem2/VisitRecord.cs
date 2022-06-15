@@ -15,21 +15,13 @@ namespace Task8.Problem2
         public VisitRecord() : this("0.0.0.0", default, default) { }
         public VisitRecord(string ip, TimeOnly time, DayOfWeek day)
         {
-            if (!IsValidIpAddress(ip))
+            if (!ValidationService.IsValidIpAddress(ip))
             {
                 throw new ArgumentException("IP address is not valid!");
             }
             IP = ip;
             Time = time;
             Day = day;
-        }
-        private static bool IsValidIpAddress(string ipAddress)
-        {
-            if (ipAddress != null && ipAddress.Count(ch => ch == '.') == 3)
-            {
-                return IPAddress.TryParse(ipAddress, out _);
-            }
-            return false;
         }
         public void Parse(string? line)
         {
@@ -40,7 +32,7 @@ namespace Task8.Problem2
                 throw new ArgumentException("Incorrect number of arguments for record of site visit!");
             }
 
-            if (!IsValidIpAddress(splittedLine[0]))
+            if (!ValidationService.IsValidIpAddress(splittedLine[0]))
             {
                 throw new FormatException("Invalid IP address!");
             }

@@ -30,7 +30,7 @@ namespace Task8
 
             foreach (var apartment in apartmentData)
             {
-                Console.Write(apartment);
+                Console.Write(apartment == null ? "" : apartment);
                 Console.WriteLine(new String('-', 80));
             }
             Console.ReadLine();

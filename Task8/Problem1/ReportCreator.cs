@@ -43,8 +43,8 @@ namespace Task8.Problem1
 
                         table.AddRow(
                             recordNumber,
-                            record.ApartmentNumber,
-                            record.Surname,
+                            record.Owner.ApartmentNumber,
+                            record.Owner.Surname,
                             $"{indications[1] - indications[0]} kWh",
                             $"{indications[2] - indications[1]} kWh",
                             $"{indications[3] - indications[2]} kWh",
@@ -87,8 +87,8 @@ namespace Task8.Problem1
 
                         table.AddRow(
                             recordNumber,
-                            record.ApartmentNumber,
-                            record.Surname,
+                            record.Owner.ApartmentNumber,
+                            record.Owner.Surname,
                             $"{indications[3] - indications[0]} kWh",
                             $"{(indications[3] - indications[0]) * kilowattPerHourPrice} UAH");
 
@@ -124,8 +124,8 @@ namespace Task8.Problem1
 
                         table.AddRow(
                             recordNumber,
-                            record.ApartmentNumber,
-                            record.Surname,
+                            record.Owner.ApartmentNumber,
+                            record.Owner.Surname,
                             (DateTime.Now - dates[2].ToDateTime(new TimeOnly())).Days);
 
                         recordNumber++;

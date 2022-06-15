@@ -67,7 +67,7 @@ namespace Task8.Problem1
 
                     Records[i] = record;
                 }
-                catch (InvalidDataException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message + $" Line {i + 2}");
                 }
@@ -149,7 +149,7 @@ namespace Task8.Problem1
 
         public void PrintRecordToFile(StreamWriter target, int apartmentNumber)
         {
-            var apartmentInfo = Records?.Where(r => r?.ApartmentNumber == apartmentNumber);
+            var apartmentInfo = Records?.Where(r => r?.Owner.ApartmentNumber == apartmentNumber);
             ReportCreator.WriteReportToFile(target, apartmentInfo, NumberOfQuarter);
         }
         public void PrintRecordToFile(string targetPath, bool append, int apartmentNumber)
