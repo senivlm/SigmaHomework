@@ -22,95 +22,90 @@ namespace Task7
                 sourceFilePath :
                 @"D:\C# projects\SigmaHomework\Task7\StorageDB.txt";
         }
-        public void UpdateRecordAfterSpecifiedDate(DateOnly date)
+        public IEnumerable<string> GetLogsAfterSpecifiedDate(DateOnly date)
         {
-            var invalidRecords = new Dictionary<string, bool>();
+            var logs = new HashSet<string>();
 
-            using (var log = new StreamReader(ErrorLogFilePath))
+            using (var logReader = new StreamReader(ErrorLogFilePath))
             {
-                while (!log.EndOfStream)
+                while (!logReader.EndOfStream)
                 {
-                    string line = log.ReadLine();
-                    var partsOfLine = line.Split(new string[] { " Line: ", " Inspection date: " }, 10, StringSplitOptions.None);
+                    var partsOfLine = logReader.ReadLine()?.Split(new string[] { " Line: ", " Inspection date: " }, 3, StringSplitOptions.None);
 
-                    if (partsOfLine.Length == 3)
+                    if (partsOfLine != null && partsOfLine.Length == 3)
                     {
-                        var lineDate = DateOnly.FromDateTime(DateTime.Parse(partsOfLine[2]));
-
-                        if (lineDate > date && !invalidRecords.ContainsKey(partsOfLine[1]))
+                        if (DateTime.TryParse(partsOfLine[2], out DateTime logDateTime))
                         {
-                            invalidRecords.Add(partsOfLine[1], false);
+                            var logDate = DateOnly.FromDateTime(logDateTime);
+
+                            if (logDate > date)
+                            {
+                                logs.Add(partsOfLine[1]);
+                            }
                         }
                     }
                 }
             }
+            return logs;
+        }
+        public IEnumerable<string> GetExistingLogs(IEnumerable<string> logsEnumerable)
+        {
+            var logs = logsEnumerable.ToDictionary(str => str, str => false);
 
             using (var source = new StreamReader(SourceFilePath))
             {
                 while (!source.EndOfStream)
                 {
-                    string line = source.ReadLine();
+                    string? line = source.ReadLine();
 
-                    if (invalidRecords.ContainsKey(line))
+                    if (line != null && logs.ContainsKey(line))
                     {
-                        invalidRecords[line] = true;
+                        logs[line] = true;
                     }
                 }
             }
 
-            UpdateStorageFileRecord(invalidRecords.Where(kv => kv.Value == true).Select(kv => kv.Key));
+            return logs.Where(kv => kv.Value == true).Select(kv => kv.Key);
+        }
+        public void UpdateRecordAfterSpecifiedDate(DateOnly date)
+        {
+            var existingLogs = GetExistingLogs(GetLogsAfterSpecifiedDate(date));
+
+            UpdateStorageFileRecord(existingLogs);
         }
 
         public void UpdateStorageFileRecord(IEnumerable<string> invalidRecords)
         {
-            if (invalidRecords.Any())
-            {
-                var invalidRecordsArray = invalidRecords.ToArray();
+            var recordToChange = ConsoleUI.SelectRecordToChange(invalidRecords);
 
-                for (int i = 0; i < invalidRecordsArray.Length; i++)
+            if (recordToChange != null)
+            {
+                var StorageDB = new List<string>();
+
+                using (var sourceReader = new StreamReader(SourceFilePath))
                 {
-                    Console.WriteLine($"{i + 1}) {invalidRecordsArray[i]}");
+                    while (!sourceReader.EndOfStream)
+                    {
+                        StorageDB.Add(sourceReader.ReadLine());
+                    }
                 }
 
-                while (true)
+                if (StorageDB.Contains(recordToChange))
                 {
-                    Console.Write("Select record number you want to change: ");
+                    var replacementLine = ConsoleUI.LineReplacement(recordToChange);
 
-                    if (int.TryParse(Console.ReadLine(), out int recordNumberToChange) &&
-                        recordNumberToChange >= 1 &&
-                        recordNumberToChange <= invalidRecordsArray.Length)
+                    StorageDB[StorageDB.IndexOf(recordToChange)] = replacementLine;
+
+                    using (var sourceWriter = new StreamWriter(SourceFilePath, false))
                     {
-                        var StorageDB = new List<string>();
-
-                        using (var sourceReader = new StreamReader(SourceFilePath))
+                        foreach (var element in StorageDB)
                         {
-                            while (!sourceReader.EndOfStream)
-                            {
-                                StorageDB.Add(sourceReader.ReadLine());
-                            }
+                            sourceWriter.WriteLine(element);
                         }
-
-                        if (StorageDB.Contains(invalidRecordsArray[recordNumberToChange - 1]))
-                        {
-                            Console.Write($"Write the line that will replace the line \"{invalidRecordsArray[recordNumberToChange - 1]}\": ");
-                            string replacementLine = Console.ReadLine() ?? "";
-
-                            StorageDB[StorageDB.IndexOf(invalidRecordsArray[recordNumberToChange - 1])] = replacementLine;
-
-                            using (var sourceWriter = new StreamWriter(SourceFilePath, false))
-                            {
-                                foreach (var element in StorageDB)
-                                {
-                                    sourceWriter.WriteLine(element);
-                                }
-                            }
-
-                            using var logWriter = new StreamWriter(ErrorLogFilePath, true);
-                            logWriter.WriteLine($"Line \"{invalidRecordsArray[recordNumberToChange - 1]}\" was successfully replaced with line \"{replacementLine}\"");
-                        }
-
-                        break;
                     }
+
+                    using var logWriter = new StreamWriter(ErrorLogFilePath, true);
+                    logWriter.WriteLine($"Line \"{recordToChange}\" was successfully replaced with line \"{replacementLine}\"");
                 }
             }
         }

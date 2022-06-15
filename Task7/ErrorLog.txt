@@ -21,3 +21,9 @@ ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line: 
 Line "" was successfully replaced with line "Meat Mutton 49,50 1,3 secondgrade mutton"
 FormatException: Invalid product price! Line: Product Cola 33.?--99 1.0 Inspection date: 07.06.2022 16:15:48
 Line "Product Cola 33.?--99 1.0" was successfully replaced with line "Product Cola 33.99 1.0"
+ArgumentException: Incorrect number of arguments for product! Line: Product Water 12,00 Inspection date: 15.06.2022 16:38:00
+Line "Product Water 12,00" was successfully replaced with line ""
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 15.06.2022 16:38:33
+Line "" was successfully replaced with line "pppppp =)"
+ArgumentNullException: Value cannot be null. (Parameter 'Invalid type parameter!') Line: pppppp =) Inspection date: 15.06.2022 16:38:53
+Line "pppppp =)" was successfully replaced with line "Product Water 12.50 0.5"

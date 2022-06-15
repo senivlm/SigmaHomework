@@ -2,6 +2,6 @@ Product apples 23.97 1,0
 Product Apples 23,97 1.0
 Product Cola 33.99 1.0
 Meat Chicken 45.90 1.0 topgrade chicken
-Product Water 12,00 0,5
+Product Water 12.50 0.5
 Meat Mutton 49,50 1,3 secondgrade mutton
 DairyProduct Milk 32.00 0.5 7

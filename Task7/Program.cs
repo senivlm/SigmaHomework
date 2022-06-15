@@ -8,21 +8,32 @@ namespace Task7
     {
         static void Main(string[] args)
         {
-            var storage = new Storage();
+            try
+            {
+                var storage = new Storage();
 
-            storage.AddProductsFromFile(@"D:\C# projects\SigmaHomework\Task7\StorageDB.txt");//Valid path: D:\C# projects\SigmaHomework\Task7\StorageDB.txt
+                storage.AddProductsFromFile(@"D:\C# projects\SigmaHomework\Task7\Stor.txt");//Valid path: D:\C# projects\SigmaHomework\Task7\StorageDB.txt
 
-            storage.OutputStorageInformation();
+                storage.OutputStorageInformation();
 
-            storage.ChangePriceForProducts(-5.0m);
+                storage.ChangePriceForProducts(-5.0m);
 
-            storage.OutputStorageInformation();
+                storage.OutputStorageInformation();
 
-            LogAnalyser logAnalyser = new LogAnalyser(@"D:\C# projects\SigmaHomework\Task7\ErrorLog.txt",
-                @"D:\C# projects\SigmaHomework\Task7\StorageDB.txt");
+                LogAnalyser logAnalyser = new LogAnalyser(@"D:\C# projects\SigmaHomework\Task7\ErrorLog.txt",
+                    @"D:\C# projects\SigmaHomework\Task7\StorageDB.txt");
 
-            logAnalyser.UpdateRecordAfterSpecifiedDate(new DateOnly(2022, 6, 5));
-
+                Console.Write("Enter date after which you want to change logs: ");
+                if (!DateOnly.TryParse(Console.ReadLine(), out DateOnly date))
+                {
+                    throw new ArgumentException("Invalid input date!");
+                }
+                logAnalyser.UpdateRecordAfterSpecifiedDate(date);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         }
     }
