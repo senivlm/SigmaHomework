@@ -1,15 +1,32 @@
-﻿namespace Task9
+﻿using Task9.FileWorker;
+using Task9.Services;
+
+namespace Task9
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            //Потрібно передати список всіх продуктів відносно страв, які треба приготувати.
-            //Сказати скільки сумарно нада купити чого і яка ціна буде
+            try
+            {
+                var rates = new RatesFileReader("Course.txt", ModelsValidator.ParseExchangeRate)
+                    .ReadFromFile();
+                var priceKurant = new PriceKurantFileReader("Prices.txt")
+                    .ReadFromFile();
+                var menu = new MenuFileReader("Menu.txt", ModelsValidator.ParseIngredient, ModelsValidator.ParseDish)
+                    .ReadFromFile();
 
+                var fileWriter = new FileWriter(@"D:\C# projects\SigmaHomework\Task9\Result.txt");
+                fileWriter.WriteToFile(menu.GetRestaurantDemands(priceKurant, 2, rates[ConsoleUI.ChooseCurrency(rates)]!), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
 
-
-            var studentData = new Dictionary<string, int>() {
+            //Some lecture things
+            /*var studentData = new Dictionary<string, int>() {
                 { "Pavlenko", 2 },
                 {"Grigorov", 2 },
                 {"Petrov", 3 },
@@ -35,8 +52,7 @@
                 {
                     Console.WriteLine($"Student: {listElement}");
                 }
-            }
-            Console.ReadLine();
+            }*/
         }
     }
 }

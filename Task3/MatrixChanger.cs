@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Task3
         Down,
         Right
     }
-    internal class MatrixChanger
+    internal class MatrixChanger : IEnumerable<int>
     {
         private int rows;
         private int cols;
@@ -90,6 +91,32 @@ namespace Task3
                 isTopRight = !isTopRight;
             }
             OutputMatrix();
+        }
+
+        /*public IEnumerator<int> GetEnumerator()
+        {
+            for (int column = 0; column < Cols; column++)
+            {
+                for (int row = 0; row < Rows; row++)
+                {
+                    yield return Matrix[row, column];
+                }
+            }
+        }*/
+        public IEnumerator<int> GetEnumerator()
+        {
+
+            for (int row = 0; row < Rows; row++)
+            {
+                for (int column = 0; column < Cols; column++)
+                {
+                    yield return Matrix[row, column];
+                }
+            }
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,7 @@
         {
             try
             {
-                Vector vector = new Vector(new int[] { 1, 2, 4, 3, 3, 2, 1 });
+                /*Vector vector = new Vector(new int[] { 1, 2, 4, 3, 3, 2, 1 });
 
                 //Paragraph 1
                 Console.WriteLine(vector.IsPalindrom());
@@ -30,10 +30,27 @@
 
                 MatrixChanger matrixChanger = new MatrixChanger(rows, cols);
                 matrixChanger.DiagonalSnakeMatrix(TurnSide.Right);
+                foreach(var element in matrixChanger)
+                {
+
+                }
 
                 //Paragraph 5
                 vector.InitShuffle();
-                Console.WriteLine($"Shuffled array: {vector}");
+                Console.WriteLine($"Shuffled array: {vector}");*/
+
+                //Lesson 16.06
+                Console.Write("Enter number of rows: ");
+                int rows = int.Parse(Console.ReadLine());
+                Console.Write("Enter number of columns: ");
+                int cols = int.Parse(Console.ReadLine());
+
+                MatrixChanger matrixChanger = new MatrixChanger(rows, cols);
+                //matrixChanger.DiagonalSnakeMatrix(TurnSide.Right);
+                foreach (var element in matrixChanger)
+                {
+                    Console.Write($"{element} ");
+                }
             }
             catch (Exception ex)
             {
@@ -42,6 +59,5 @@
 
             Console.ReadKey();
         }
-    }
     }
 }
