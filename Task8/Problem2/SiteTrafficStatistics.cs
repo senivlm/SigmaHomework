@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Task8.Problem2
 {
     public class SiteTrafficStatistics
-    {
+    {//linq тут доречні.Молодець!
         private List<VisitRecord> visitRecords = new List<VisitRecord>();
 
         #region Constructors
