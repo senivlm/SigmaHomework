@@ -23,7 +23,7 @@ namespace Task7
                 @"D:\C# projects\SigmaHomework\Task7\StorageDB.txt";
         }
         public IEnumerable<string> GetLogsAfterSpecifiedDate(DateOnly date)
-        {
+        {// там умова трішки інша. Треба було після вказаної дати, знайти проблемні дані і надати користувачу можливість  їх змінити.
             var logs = new HashSet<string>();
 
             using (var logReader = new StreamReader(ErrorLogFilePath))
