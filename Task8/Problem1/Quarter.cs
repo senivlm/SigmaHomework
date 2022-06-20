@@ -24,6 +24,7 @@ namespace Task8.Problem1
             }
         }
         public int NumberOfQuarter { get; private set; }
+        //Records мав би бути з маленької літери.
         private PersonData[] Records;
 
         #region Constructors
@@ -46,7 +47,7 @@ namespace Task8.Problem1
             for (int i = 0; i < Records.Length; i++)
             {
                 try
-                {
+                {//Ви плутаєте порожній з нествореним. Тут краще виняток
                     string? line = streamReader.ReadLine();
                     if (line == null)
                     {
@@ -76,6 +77,7 @@ namespace Task8.Problem1
         #endregion
 
         #region Methods
+            //Чому тип поверення не Quarter?
         public static IEnumerable<PersonData> operator +(Quarter firstQuarter, Quarter secondQuarter)
         {
 
