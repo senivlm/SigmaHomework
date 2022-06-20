@@ -25,7 +25,7 @@ namespace Task8
             {
                 Console.WriteLine(ex.Message);
             }
-
+//Цей оператор краще після 22 стрічки вставити
             var apartmentData = quarter1 + quarter2;
 
             foreach (var apartment in apartmentData)
