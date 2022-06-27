@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Task10.Problem2
 {
     public class DiagonalSnakeMatrix : AbstractMatrix
-    {
+    {// Cумарно добре вносите абстракції!!!
         public DiagonalSnakeMatrix() : base() { }
         public DiagonalSnakeMatrix(int[,] matrix, TurnSide turnSide = default) : base(matrix, turnSide) { }
         public override IEnumerator<int> GetEnumerator()
@@ -19,6 +19,7 @@ namespace Task10.Problem2
             }
             int counter = 1;
             bool isTopRight = _turnSide == TurnSide.Right;
+            //чи не можна було обійтись однією змінною замість i і counter
             for (int i = 0; counter <= _rows * _cols; i++)
             {
                 int row = isTopRight ? i : 0;
