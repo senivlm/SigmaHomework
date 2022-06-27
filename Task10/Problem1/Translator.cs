@@ -117,7 +117,8 @@ namespace Task10.Problem1
             Console.WriteLine("Text was successfully translated!");
         }
         private static string TranslateLine(string lineToTranslate, Dictionary<string, string> translates)
-        {
+        {// стрічка буде постійно змінюватись, тому можна працювати з StringBuilder.
+        // Якщо слова в словнику не буде, то не виконаєм уиову задачі.
             var newLine = lineToTranslate;
             foreach (var wordTranslation in translates)
             {
