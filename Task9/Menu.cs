@@ -32,7 +32,7 @@ namespace Task9
             }
         }
         public string GetRestaurantDemands(PriceKurant priceKurant, int numberOfAttempts, ExchangeRate rate)
-        {
+        {//використання інтерфейса актуальне
             var ingredientInformation = new Dictionary<IIngredient, IngredientRequirement>();
 
             foreach (var dish in _dishes)
