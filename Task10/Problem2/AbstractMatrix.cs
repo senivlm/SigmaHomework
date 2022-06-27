@@ -56,6 +56,7 @@ namespace Task10.Problem2
             Cols = matrix.GetLength(1);
             _turnSide = turnSide;
         }
+        // Прив'язка до консолі!!!
         public void OutputMatrix()
         {
             for (int i = 0; i < _rows; i++)
