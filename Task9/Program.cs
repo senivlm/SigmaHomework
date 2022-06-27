@@ -6,7 +6,7 @@ namespace Task9
     internal class Program
     {
         static void Main(string[] args)
-        {
+        {// не виведено загальну суму
             try
             {
                 var rates = new RatesFileReader("Course.txt", ModelsValidator.ParseExchangeRate)
