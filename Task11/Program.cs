@@ -12,7 +12,7 @@ namespace Task11
         {
             try
             {
-                //Problem1Testing();
+                Problem1Testing();
 
                 Problem2Testing();
             }

@@ -1,0 +1,7 @@
+OrdinaryProduct apples 23.97 1,0
+OrdinaryProduct Apples 23,97 1.0
+OrdinaryProduct Cola 33.99 1.0
+Meat Chicken 45.90 1.0 topgrade chicken
+DairyProduct Milk 32.00 0.5 -7
+OrdinaryProduct Water 12,00 0,5
+Meat Mutton 49,50 1,3 secondgrade mutton

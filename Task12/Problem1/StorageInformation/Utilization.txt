@@ -1,0 +1,6 @@
+Product addition date: 28.06.2022 22:33:56
+Product name: Milk
+Product price: 32,00
+Product weight: 0,5
+Product expiration date: -7
+--------------------------------------------------

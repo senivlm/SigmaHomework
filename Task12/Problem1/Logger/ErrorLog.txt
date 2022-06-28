@@ -1,0 +1,28 @@
+﻿ArgumentException: Incorrect number of arguments for product! Line: Product Cola 33.99  Inspection date: 06.06.2022 21:23:22
+FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:27:10
+FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:29:35
+ArgumentException: Incorrect number of arguments for product! Line: Product Apples 23,97  Inspection date: 06.06.2022 21:31:03
+FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:31:03
+FormatException: Invalid meat type! Line: Meat Chicken 45.90 1.0 topgrade chick Inspection date: 06.06.2022 21:31:03
+ArgumentException: Incorrect number of arguments for product! Line: Product Apples 23,97  Inspection date: 06.06.2022 21:31:31
+FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:31:31
+FormatException: Invalid meat category! Line: Meat Chicken 45.90 1.0 top chicken Inspection date: 06.06.2022 21:31:31
+ArgumentException: Incorrect number of arguments for product! Line: Product Apples 23,97  Inspection date: 06.06.2022 21:32:00
+FormatException: Invalid product price! Line: Product Cola 33.?99 1.0 Inspection date: 06.06.2022 21:32:00
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 06.06.2022 23:38:43
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 07.06.2022 15:49:19
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 07.06.2022 15:57:43
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 07.06.2022 16:01:00
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:   Inspection date: 07.06.2022 16:01:19
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:   Inspection date: 07.06.2022 16:09:05
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:   Inspection date: 07.06.2022 16:09:25
+Line " " was successfully replaced with line "Product Water 12,00 0,5"
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 07.06.2022 16:11:29
+Line "" was successfully replaced with line "Meat Mutton 49,50 1,3 secondgrade mutton"
+FormatException: Invalid product price! Line: Product Cola 33.?--99 1.0 Inspection date: 07.06.2022 16:15:48
+Line "Product Cola 33.?--99 1.0" was successfully replaced with line "Product Cola 33.99 1.0"
+FormatException: Invalid meat type! Line: Meat Mutton 49,50 1,3 secondgrade mutto Inspection date: 24.06.2022 21:37:23
+FormatException: Invalid meat type! Line: Meat Mutton 49,50 1,3 secondgrade mutto Inspection date: 24.06.2022 21:39:21
+Line "Meat Mutton 49,50 1,3 secondgrade mutto" was successfully replaced with line ""
+ArgumentNullException: Value cannot be null. (Parameter 'Line is empty!') Line:  Inspection date: 24.06.2022 21:40:17
+Line "" was successfully replaced with line "Meat Mutton 49,50 1,3 secondgrade mutton"

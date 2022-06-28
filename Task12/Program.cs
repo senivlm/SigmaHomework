@@ -1,132 +1,54 @@
-﻿namespace Task12
+﻿using Task12.Problem1.Logger;
+using Task12.Problem1.Services;
+using Task12.Problem1.StorageInformation;
+using Task12.Problem1.Products;
+
+namespace Task12
 {
-    public delegate int ActionDelegate(int[] array);
     internal class Program
     {
         static void Main()
         {
-            /*int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            try
+            {
+                var storageNormatives = new StorageNormatives(
+                    @"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\MeatPriceChanges.txt",
+                    @"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\DairyProductsPriceChanges.txt");
 
-            ActionDelegate actionDelegate = CalculateElementsSum;
-            actionDelegate += CalculateElementsMultiplication;
+                var logAnalyser = new LogAnalyser(
+                    @"D:\C# projects\SigmaHomework\Task12\Problem1\Logger\ErrorLog.txt",
+                    @"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\StorageDB.txt");
 
-            var matrix = new Matrix(numbers, actionDelegate);
-            Console.WriteLine(matrix.GetStringArr());*/
+                var utilizationFileWriter = new UtilizationFileWriter(
+                    @"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\Utilization.txt");
 
-            List<Person> people = new List<Person>() {
-                new Person("n1","p1"),
-                new Person("n2","p2"),
-                new Person("n3","p3"),
-                new Person("n4","p4") };
+                ReaderFromFile.OnExceptionAction += Console.WriteLine;//Навішую обробник події при читанні з файлу
+                ReaderFromFile.OnExceptionAction += logAnalyser.AddLog;//Навішую обробник події при читанні з файлу
 
-            PersonCollection personCollection = new PersonCollection(people, "Director");
-            Console.WriteLine(personCollection);
+                //Problem1
+                var storage = new Storage(storageNormatives,
+                    ReaderFromFile.ReadGoodsFromFile(@"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\StorageDB.txt", 3),
+                    utilizationFileWriter.AddUtilizationRecord//Навішую оброник події при доданні простроченого продукту
+                    );//При невірному шляху користувачу дається можливість 3 рази ввести вірний
 
-            personCollection.IsSameSurname += SameSurnameAction;
-            Console.WriteLine(personCollection);
+                Console.WriteLine(storage);
+
+                //Problem2
+                foreach (var storageItem in storage.FindAllGoods(g => g.Price < 35.00m))//Знайти продукти, ціна яких менша 35
+                {
+                    Console.WriteLine($"{storageItem}{new string('-', 50)}");
+                }
+
+                //Знайти перший м'ясний продукт, який має найвищу категорію
+                Console.WriteLine($"***\n{storage.FindGood(g => g is Meat meat && meat.Category == MeatCategory.TopGrade)}***");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             Console.ReadLine();
-        }
-        public static int CalculateElementsSum(int[] array)
-        {
-            return array.Sum();
-        }
-        public static int CalculateElementsMultiplication(int[] array)
-        {
-            return array.Aggregate((a, b) => a * b);
-        }
-        public static void SameSurnameAction()
-        {
-            Console.WriteLine("List has people with same surname!");
-        }
-    }
-    public delegate void OnSameSurnameDelegate();
-    public class PersonCollection
-    {
-        protected List<Person> _people;
-        public string Director { get; }
-        public virtual event OnSameSurnameDelegate IsSameSurname;
-        public PersonCollection(List<Person> people, string direcor)
-        {
-            _people = new List<Person>(people);
-            Director = direcor;
-        }
-        public virtual void AddPerson(Person person)
-        {
-            if (_people.Contains(person))
-            {
-                IsSameSurname?.Invoke();
-            }
-            _people.Add(person);
-        }
-        public override string ToString()
-        {
-            return string.Join('\n', _people);
-        }
-    }
-    public class AgresivePersonCollection : PersonCollection
-    {
-        public override event OnSameSurnameDelegate IsSameSurname;
-        public AgresivePersonCollection(List<Person> people, string direcor) : base(people, direcor)
-        {
-
-        }
-        public override void AddPerson(Person person)
-        {
-            if (_people.Contains(person))
-            {
-                IsSameSurname?.Invoke();
-                return;
-            }
-            _people.Add(person);
-        }
-        public override string ToString()
-        {
-            return string.Join('\n', _people);
-        }
-    }
-    public class Person
-    {
-        public string Name { get; }
-        public string Surname { get; }
-        public Person(string name, string surname)
-        {
-            Name = name;
-            Surname = surname;
-        }
-        public override string ToString()
-        {
-            return Surname;
-        }
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode() ^ Surname.GetHashCode();
-        }
-        public override bool Equals(object? obj)
-        {
-            if (obj is Person person)
-            {
-                return Surname.Equals(person.Surname) && Name.Equals(person.Name);
-            }
-            return false;
-        }
-    }
-
-    public class Matrix
-    {
-        private ActionDelegate _actionDelegate;
-        public ActionDelegate ActionDelegate { get => _actionDelegate; private set => _actionDelegate += value; }
-        private int[] _array;
-        public Matrix(int[] array, ActionDelegate actionDelegate)
-        {
-            _array = array;
-            ActionDelegate = actionDelegate;
-        }
-        public string GetStringArr()
-        {
-            string result = "";
-            result += $"{ActionDelegate(_array)} ";
-            return result;
         }
     }
 }
