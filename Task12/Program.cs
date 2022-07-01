@@ -2,6 +2,8 @@
 using Task12.Problem1.Services;
 using Task12.Problem1.StorageInformation;
 using Task12.Problem1.Products;
+using Task12.Problem3;
+using Task12.Problem3.StackOperations;
 
 namespace Task12
 {
@@ -42,6 +44,16 @@ namespace Task12
                 //Знайти перший м'ясний продукт, який має найвищу категорію
                 Console.WriteLine($"***\n{storage.FindGood(g => g is Meat meat && meat.Category == MeatCategory.TopGrade)}***");
 
+                //Problem3
+                var formula = "( 4 + 3 ) ^ 2 / ( 2 - 6 * sin ( -8 - 2 ) ) + cos ( 12 * ( 16 + 2 ) )";
+                var calculator = new FormulaCalculator(formula);
+                Console.WriteLine($"Before adding square root operation: {calculator.Calculate()}");
+
+                FormulaCalculator.AddOperation(new UnaryStackOperation("sqrt", 4, v => Math.Sqrt(v)));
+
+                formula += " * sqrt ( 64 )";
+                calculator = new FormulaCalculator(formula);
+                Console.WriteLine($"After adding square root operation: {calculator.Calculate()}");
             }
             catch (Exception ex)
             {

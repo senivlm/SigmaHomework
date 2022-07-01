@@ -1,4 +1,4 @@
-Product addition date: 28.06.2022 22:33:56
+Product addition date: 01.07.2022 1:59:04
 Product name: Milk
 Product price: 32,00
 Product weight: 0,5
