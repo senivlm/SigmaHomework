@@ -6,7 +6,7 @@ namespace Task12.Problem3
     public class FormulaCalculator
     {
         private readonly string _formula;
-        private static Dictionary<string, StackOperation> _stackOperations = new List<StackOperation>()
+        private static readonly Dictionary<string, StackOperation> _stackOperations = new List<StackOperation>()
         {
             new BinaryStackOperation("+", 1, (a,b) => a + b),
             new BinaryStackOperation("-", 1, (a,b) => a - b),
@@ -29,6 +29,14 @@ namespace Task12.Problem3
         public static void RemoveOperation(string stringRepresentation)
         {
             _stackOperations.Remove(stringRepresentation);
+        }
+        public static IEnumerable<string> GetAvailableOperations()
+        {
+            return _stackOperations.Keys;
+        }
+        public static bool ContainsOperation(string operation)
+        {
+            return _stackOperations.ContainsKey(operation);
         }
         public double Calculate()
         {

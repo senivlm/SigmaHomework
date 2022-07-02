@@ -49,11 +49,14 @@ namespace Task12
                 var calculator = new FormulaCalculator(formula);
                 Console.WriteLine($"Before adding square root operation: {calculator.Calculate()}");
 
-                FormulaCalculator.AddOperation(new UnaryStackOperation("sqrt", 4, v => Math.Sqrt(v)));
+                FormulaCalculator.AddOperation(new UnaryStackOperation("sqrt", 4, v => Math.Sqrt(v)));//Додавання нової функції/операції
 
                 formula += " * sqrt ( 64 )";
                 calculator = new FormulaCalculator(formula);
                 Console.WriteLine($"After adding square root operation: {calculator.Calculate()}");
+
+                var calculator2 = new FormulaInitializerService().InitializeFromConsole();//Користувач конфігурує формулу через консоль
+                Console.WriteLine($"Calculation result: {calculator2.Calculate()}");
             }
             catch (Exception ex)
             {
