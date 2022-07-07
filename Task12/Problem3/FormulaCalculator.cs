@@ -6,6 +6,7 @@ namespace Task12.Problem3
     public class FormulaCalculator
     {
         private readonly string _formula;
+        //Це перл!
         private static readonly Dictionary<string, StackOperation> _stackOperations = new List<StackOperation>()
         {
             new BinaryStackOperation("+", 1, (a,b) => a + b),
@@ -39,7 +40,7 @@ namespace Task12.Problem3
             return _stackOperations.ContainsKey(operation);
         }
         public double Calculate()
-        {
+        {// де гарантія того, що прийшла формула з правильно розділеними пропусками лексемами?
             var values = new Stack<double>();
             var operations = new Stack<string>();
 
