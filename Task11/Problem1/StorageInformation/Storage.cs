@@ -1,7 +1,7 @@
 ﻿using Task11.Problem1.Products;
 
 namespace Task11.Problem1.StorageInformation
-{
+{// У Вас подія задіюється тільки при читанні, а при додаванні не спрацює.
     public class Storage
     {
         #region Fields
