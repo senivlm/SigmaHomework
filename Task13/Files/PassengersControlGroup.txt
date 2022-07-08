@@ -1,0 +1,30 @@
+﻿Name: Frankie
+Age: 47
+Status: XIFHXY
+Time spent (in miliseconds): 2545
+
+Name: Maria
+Age: 71
+Status: XIFHXY
+Time spent (in miliseconds): 2445
+
+Name: Justina
+Age: 73
+Status: XIFHXY
+Time spent (in miliseconds): 2212
+
+Name: Rod
+Age: 64
+Status: XIFHXY
+Time spent (in miliseconds): 2251
+
+Name: Kallie
+Age: 41
+Status: XIFHXY
+Time spent (in miliseconds): 2082
+
+Name: Tennille
+Age: 27
+Status: XIFHXY
+Time spent (in miliseconds): 1069
+

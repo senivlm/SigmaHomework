@@ -1,0 +1,192 @@
+﻿Paydesk number: 3
+Date and time of service: 08.07.2022 16:21:07
+Customer information:
+Name: Quintin
+Age: 34
+Status: HGMSKT
+Time spent (in miliseconds): 4183
+
+Paydesk number: 4
+Date and time of service: 08.07.2022 16:21:08
+Customer information:
+Name: Paulina
+Age: 26
+Status: ADMBLK
+Time spent (in miliseconds): 3801
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:10
+Customer information:
+Name: Marcia
+Age: 37
+Status: OSRYKG
+Time spent (in miliseconds): 6509
+
+Paydesk number: 4
+Date and time of service: 08.07.2022 16:21:11
+Customer information:
+Name: Wesley
+Age: 30
+Status: JMZOXF
+Time spent (in miliseconds): 2784
+
+Paydesk number: 3
+Date and time of service: 08.07.2022 16:21:11
+Customer information:
+Name: Shirley
+Age: 49
+Status: WJXLQN
+Time spent (in miliseconds): 4762
+
+Paydesk number: 5
+Date and time of service: 08.07.2022 16:21:12
+Customer information:
+Name: Jana
+Age: 19
+Status: LHMUJB
+Time spent (in miliseconds): 8970
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:12
+Customer information:
+Name: Jose
+Age: 87
+Status: DBTDZK
+Time spent (in miliseconds): 2540
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:16
+Customer information:
+Name: Martha
+Age: 77
+Status: EQOMQC
+Time spent (in miliseconds): 3602
+
+Paydesk number: 4
+Date and time of service: 08.07.2022 16:21:16
+Customer information:
+Name: Marcel
+Age: 20
+Status: CMAUXO
+Time spent (in miliseconds): 4928
+
+Paydesk number: 3
+Date and time of service: 08.07.2022 16:21:16
+Customer information:
+Name: Julius
+Age: 63
+Status: BGIYJN
+Time spent (in miliseconds): 4452
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:19
+Customer information:
+Name: Kelly
+Age: 72
+Status: GWDOPE
+Time spent (in miliseconds): 2922
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:22
+Customer information:
+Name: Leann
+Age: 44
+Status: HQHPIU
+Time spent (in miliseconds): 2916
+
+Paydesk number: 3
+Date and time of service: 08.07.2022 16:21:23
+Customer information:
+Name: Kortney
+Age: 42
+Status: ZQYZDZ
+Time spent (in miliseconds): 7399
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:31
+Customer information:
+Name: Bryant
+Age: 85
+Status: HRKKTQ
+Time spent (in miliseconds): 9856
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:38
+Customer information:
+Name: Miranda
+Age: 44
+Status: IYEBNK
+Time spent (in miliseconds): 7065
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:43
+Customer information:
+Name: Bobby
+Age: 77
+Status: MCTNBM
+Time spent (in miliseconds): 4707
+
+Paydesk number: 4
+Date and time of service: 08.07.2022 16:21:43
+Customer information:
+Name: Jesse
+Age: 60
+Status: NHIBKU
+Time spent (in miliseconds): 4545
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:47
+Customer information:
+Name: Marsha
+Age: 65
+Status: MLRWCA
+Time spent (in miliseconds): 3817
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:54
+Customer information:
+Name: Sid
+Age: 18
+Status: TIHVTY
+Time spent (in miliseconds): 7224
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:21:58
+Customer information:
+Name: Rosario
+Age: 87
+Status: VVDKRW
+Time spent (in miliseconds): 4281
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:22:01
+Customer information:
+Name: Erik
+Age: 85
+Status: WASHHC
+Time spent (in miliseconds): 2249
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:22:05
+Customer information:
+Name: Misty
+Age: 45
+Status: WEIEUI
+Time spent (in miliseconds): 3989
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:22:09
+Customer information:
+Name: Verdie
+Age: 74
+Status: XYMKHJ
+Time spent (in miliseconds): 3900
+
+Paydesk number: 1
+Date and time of service: 08.07.2022 16:22:13
+Customer information:
+Name: Raisa
+Age: 81
+Status: YDFLPF
+Time spent (in miliseconds): 4489
+
