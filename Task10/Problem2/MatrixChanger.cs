@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task10.Problem2
 {
@@ -50,16 +46,18 @@ namespace Task10.Problem2
             Rows = matrix.GetLength(0);
             Cols = matrix.GetLength(1);
         }
-        public void OutputMatrix()
+        public string GetMatrixString()
         {
+            var builder = new StringBuilder();
             for (int i = 0; i < _rows; i++)
             {
                 for (int j = 0; j < _cols; j++)
                 {
-                    Console.Write($"{Matrix[i, j]}\t");
+                    builder.Append($"{Matrix[i, j]}\t");
                 }
-                Console.WriteLine();
+                builder.Append('\n');
             }
+            return builder.ToString();
         }
         //DiagonalSnake
         public IEnumerator<int> GetEnumerator()
@@ -68,9 +66,8 @@ namespace Task10.Problem2
             {
                 throw new Exception("Matrix must be square to use DiagonatSnakeMatrix method!");
             }
-            int counter = 1;
             bool isTopRight = true;
-            for (int i = 0; counter <= _rows * _cols; i++)
+            for (int i = 0; i < _rows + _cols - 1; i++)
             {
                 int row = isTopRight ? i : 0;
                 int col = isTopRight ? 0 : i;
@@ -79,7 +76,6 @@ namespace Task10.Problem2
                     if (row < _rows && col < _cols)
                     {
                         yield return Matrix[row, col];
-                        counter++;
                     }
                     if (isTopRight)
                     {

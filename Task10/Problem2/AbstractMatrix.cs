@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task10.Problem2
 {
@@ -56,16 +52,18 @@ namespace Task10.Problem2
             Cols = matrix.GetLength(1);
             _turnSide = turnSide;
         }
-        public void OutputMatrix()
+        public string GetMatrixString()
         {
+            var builder = new StringBuilder();
             for (int i = 0; i < _rows; i++)
             {
                 for (int j = 0; j < _cols; j++)
                 {
-                    Console.Write($"{Matrix[i, j]}\t");
+                    builder.Append($"{Matrix[i, j]}\t");
                 }
-                Console.WriteLine();
+                builder.Append('\n');
             }
+            return builder.ToString();
         }
         public abstract IEnumerator<int> GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator()

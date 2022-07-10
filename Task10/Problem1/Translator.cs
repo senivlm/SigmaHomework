@@ -76,6 +76,7 @@ namespace Task10.Problem1
                     }
                     ((IFileReader<KeyValuePair<string, string>?>)_dictionaryReader).RestartStreamReader();//to reuse StreamReader
 
+                    //User adding new translation
                     if (wordEquivalent == null)
                     {
                         try
@@ -118,12 +119,20 @@ namespace Task10.Problem1
         }
         private static string TranslateLine(string lineToTranslate, Dictionary<string, string> translates)
         {
-            var newLine = lineToTranslate;
+            var newLine = new StringBuilder(lineToTranslate);
+
             foreach (var wordTranslation in translates)
             {
-                newLine = Regex.Replace(newLine, $@"\b{wordTranslation.Key}\b", wordTranslation.Value);
+                var matches = Regex.Matches(newLine.ToString(), $@"\b{wordTranslation.Key}\b");
+                var moveIndex = 0;
+                foreach (Match match in matches)
+                {
+                    newLine.Remove(match.Index + moveIndex, match.Length);
+                    newLine.Insert(match.Index + moveIndex, wordTranslation.Value);
+                    moveIndex += wordTranslation.Value.Length - match.Length;
+                }
             }
-            return newLine;
+            return newLine.ToString();
         }
         private static HashSet<string> GetWordsFromLine(string line)
         {
