@@ -45,7 +45,7 @@ namespace Task12
                 Console.WriteLine($"***\n{storage.FindGood(g => g is Meat meat && meat.Category == MeatCategory.TopGrade)}***");
 
                 //Problem3
-                var formula = "( 4 + 3 ) ^ 2 / ( 2 - 6 * sin ( -8 - 2 ) ) + cos ( 12 * ( 16 + 2 ) )";
+                var formula = "(4+3 ) ^ 2 / ( 2- 6 * sin ( -8.1     - 2 ) )+ cos( 12 * (16,2 + 2) )";
                 var calculator = new FormulaCalculator(formula);
                 Console.WriteLine($"Before adding square root operation: {calculator.Calculate()}");
 

@@ -20,7 +20,7 @@ namespace Task12.Problem3
                                                       //(щоб не виділялась додаткова пам'ять)
         public FormulaCalculator(string formula)
         {
-            _formula = Regex.Replace(formula, @"\s{2,}", " ").Trim();//Видаляю лишні пробіли
+            _formula = formula.Replace(" ", "");//Видаляю всі пробіли
         }
         public static void AddOperation(StackOperation operation)
         {
@@ -43,10 +43,9 @@ namespace Task12.Problem3
             var values = new Stack<double>();
             var operations = new Stack<string>();
 
-            var partsOfFormula = _formula.Split(' ');//Ділю формулу на елементи
-            foreach (var partOfFormula in partsOfFormula)
+            foreach (var partOfFormula in GetFormulaElements())//Отримую частини формули
             {
-                if (double.TryParse(partOfFormula, out double result))//Перевіряю чи є елемент числом
+                if (double.TryParse(partOfFormula.Replace('.', ','), out double result))//Перевіряю чи є елемент числом
                 {
                     values.Push(result);
                 }
@@ -84,6 +83,13 @@ namespace Task12.Problem3
             }
 
             return values.Pop();
+        }
+        private IEnumerable<string> GetFormulaElements()
+        {
+            //Формую частину регулярного виразу, яка буде витягувати всі операції та функції з формули
+            var operations = string.Join('|', _stackOperations.Keys.Select(op => Regex.Replace(op, @"(?=\p{P}|\p{S})", "\\")));
+            //Ділю формулу на частини
+            return Regex.Matches(_formula, $@"((((?<=\()|^)[+-])?\d+([.,]\d+)?)|({operations}|\(|\))").Select(match => match.Value);
         }
     }
 }

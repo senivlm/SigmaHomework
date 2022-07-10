@@ -16,7 +16,7 @@ namespace Task12.Problem3
             {
                 throw new InvalidOperationException($"Invalid operation \"{operation}\"!");
             }
-            Formula.Append(operation + " ");
+            Formula.Append(operation);
         }
         public void AddNumber(string number)
         {
@@ -25,15 +25,15 @@ namespace Task12.Problem3
             {
                 throw new InvalidCastException($"Invalid number \"{number}\"!");
             }
-            Formula.Append(number + " ");
+            Formula.Append(number);
         }
         public void AddOpeningBracket()
         {
-            Formula.Append("( ");
+            Formula.Append("(");
         }
         public void AddClosingBracket()
         {
-            Formula.Append(") ");
+            Formula.Append(")");
         }
         public void ResetFormula()
         {
