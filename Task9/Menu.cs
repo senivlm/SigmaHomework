@@ -73,7 +73,8 @@ namespace Task9
                 }
             }
 
-            return ingredientInformation.CreateStringBuilderWithCurrencyValue(rate.CurrencyName).ToString();
+            return ingredientInformation.CreateStringBuilderWithCurrencyValue(rate.CurrencyName).ToString() +
+                $"\nTotal price: {ingredientInformation.Values.Sum(ir => ir.IngredientPrice)} {rate.CurrencyName}";
         }
     }
 }

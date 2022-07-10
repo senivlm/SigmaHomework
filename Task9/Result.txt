@@ -8,3 +8,4 @@ Peas - 320 grams -> 0,9792 USD
 Flour - 1800 grams -> 1,53 USD
 Zucchini - 4500 grams -> 11,3526 USD
 Cheddar cheese - 1440 grams -> 14,800608 USD
+Total price: 113,9028186 USD
