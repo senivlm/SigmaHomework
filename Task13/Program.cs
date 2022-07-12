@@ -31,6 +31,7 @@ namespace Task13
                     });
 
                 //Додаю обробник події коли яка-небудь каса буде переповнена
+                //Чому обробник не в клієнті?
                 paydesksLoad.OnQueueOverflowAction += paydesksLoad.RepurposePaydeskAsync;
 
                 //Додаю клієнтів з часовим інтервалом в 300 мілісекунд
@@ -39,6 +40,7 @@ namespace Task13
                     300);
 
                 //Чекаю поки всі клієнти будуть додані
+                //синтаксис для групи покажіть!
                 await customersAdding;
                 Console.WriteLine("All customers was added!");
 
