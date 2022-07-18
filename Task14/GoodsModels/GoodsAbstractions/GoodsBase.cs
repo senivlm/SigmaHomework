@@ -1,19 +1,30 @@
-﻿namespace Task12.Problem1.Products
-{   
-    public abstract class Product : IGoods
+﻿using System.Runtime.Serialization;
+using Task14.GoodsModels.GoodsInterfaces;
+
+namespace Task14.GoodsModels.GoodsAbstractions
+{
+    [KnownType(typeof(Table))]
+    [KnownType(typeof(Chair))]
+    [KnownType(typeof(MeatProduct))]
+    [KnownType(typeof(OrdinaryProduct))]
+    [KnownType(typeof(DairyProduct))]
+    [DataContract]
+    public abstract class GoodsBase : IGoods
     {
         #region Fields
+
         private string _name;
         private decimal _price;
-        private decimal _weight;
         #endregion
 
         #region Properties
+        [DataMember(Name = "Name")]
         public string Name
         {
             get => _name;
             protected set => _name = value ?? "";
         }
+        [DataMember(Name = "Price")]
         public decimal Price
         {
             get => _price;
@@ -26,55 +37,35 @@
                 _price = value;
             }
         }
-        public decimal Weight
-        {
-            get => _weight;
-            protected set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Weight can not be negative or zero!");
-                }
-                _weight = value;
-            }
-        }
         #endregion
 
         #region Constructors
-        public Product() : this("", 0.0m, 0.1m)
-        {
-
-        }
-        public Product(string name, decimal price, decimal weight)
+        public GoodsBase(string name, decimal price)
         {
             Name = name;
             Price = price;
-            Weight = weight;
         }
         #endregion
 
         #region Methods
         public override bool Equals(object? otherProduct)
         {
-            if (otherProduct != null && otherProduct is Product product)
+            if (otherProduct != null && otherProduct is GoodsBase product)
             {
                 return Name.Equals(product.Name) &&
-                        Price.Equals(product.Price) &&
-                        Weight.Equals(product.Weight);
+                        Price.Equals(product.Price);
             }
             return false;
         }
         public override int GetHashCode()
         {
             return Name.GetHashCode() ^
-                Price.GetHashCode() ^
-                Weight.GetHashCode();
+                Price.GetHashCode();
         }
         public override string ToString()
         {
-            return $"Product name: {Name}\n" +
-                $"Product price: {Price}\n" +
-                $"Product weight: {Weight}\n";
+            return $"Name: {Name}\n" +
+                $"Price: {Price}\n";
         }
         public virtual void ChangePrice(decimal percent)
         {

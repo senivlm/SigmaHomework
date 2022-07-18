@@ -1,0 +1,81 @@
+<Storage xmlns="http://schemas.datacontract.org/2004/07/Task14.StorageInformation" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Goods xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+		<a:anyType i:type="b:OrdinaryProduct" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Apples</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">23.97</Price>
+			<Weight xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">1</Weight>
+		</a:anyType>
+		<a:anyType i:type="b:OrdinaryProduct" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Cola</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">33.99</Price>
+			<Weight xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">1</Weight>
+		</a:anyType>
+		<a:anyType i:type="b:MeatProduct" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Chicken</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">45.90</Price>
+			<Weight xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">1</Weight>
+			<b:Category>TopGrade</b:Category>
+			<b:Type>Chicken</b:Type>
+		</a:anyType>
+		<a:anyType i:type="b:DairyProduct" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Milk</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">32.00</Price>
+			<Weight xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">0.5</Weight>
+			<b:ExpirationDate>2022-07-19T00:00:00</b:ExpirationDate>
+		</a:anyType>
+		<a:anyType i:type="b:OrdinaryProduct" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Water</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">12.00</Price>
+			<Weight xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">0.5</Weight>
+		</a:anyType>
+		<a:anyType i:type="b:MeatProduct" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Mutton</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">49.50</Price>
+			<Weight xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">1.3</Weight>
+			<b:Category>SecondGrade</b:Category>
+			<b:Type>Mutton</b:Type>
+		</a:anyType>
+		<a:anyType i:type="b:Chair" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Premium chair</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">50.00</Price>
+			<Height xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">70</Height>
+			<Length xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">30</Length>
+			<Material xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Chipboard</Material>
+			<Width xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">30</Width>
+		</a:anyType>
+		<a:anyType i:type="b:Table" xmlns:b="http://schemas.datacontract.org/2004/07/Task14.GoodsModels">
+			<Name xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Premium table</Name>
+			<Price xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">120.99</Price>
+			<Height xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">76</Height>
+			<Length xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">100</Length>
+			<Material xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">Wood</Material>
+			<Width xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions">80</Width>
+		</a:anyType>
+	</Goods>
+	<StorageNormatives>
+		<DairyProductNormatives xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+			<a:KeyValueOfintdecimal>
+				<a:Key>7</a:Key>
+				<a:Value>-5</a:Value>
+			</a:KeyValueOfintdecimal>
+			<a:KeyValueOfintdecimal>
+				<a:Key>14</a:Key>
+				<a:Value>-3</a:Value>
+			</a:KeyValueOfintdecimal>
+		</DairyProductNormatives>
+		<MeatProductNormatives xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+			<a:KeyValueOfMeatCategorydecimalCbDkcd96>
+				<a:Key>TopGrade</a:Key>
+				<a:Value>0</a:Value>
+			</a:KeyValueOfMeatCategorydecimalCbDkcd96>
+			<a:KeyValueOfMeatCategorydecimalCbDkcd96>
+				<a:Key>FirstGrade</a:Key>
+				<a:Value>-3</a:Value>
+			</a:KeyValueOfMeatCategorydecimalCbDkcd96>
+			<a:KeyValueOfMeatCategorydecimalCbDkcd96>
+				<a:Key>SecondGrade</a:Key>
+				<a:Value>-5</a:Value>
+			</a:KeyValueOfMeatCategorydecimalCbDkcd96>
+		</MeatProductNormatives>
+	</StorageNormatives>
+</Storage>

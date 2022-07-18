@@ -13,7 +13,7 @@ namespace Task12
         {
             try
             {
-                var storageNormatives = new StorageNormatives(
+                /*var storageNormatives = new StorageNormatives(
                     @"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\MeatPriceChanges.txt",
                     @"D:\C# projects\SigmaHomework\Task12\Problem1\StorageInformation\DairyProductsPriceChanges.txt");
 
@@ -42,7 +42,7 @@ namespace Task12
                 }
 
                 //Знайти перший м'ясний продукт, який має найвищу категорію
-                Console.WriteLine($"***\n{storage.FindGood(g => g is Meat meat && meat.Category == MeatCategory.TopGrade)}***");
+                Console.WriteLine($"***\n{storage.FindGood(g => g is Meat meat && meat.Category == MeatCategory.TopGrade)}***");*/
 
                 //Problem3
                 var formula = "(4+3 ) ^ 2 / ( 2- 6 * sin ( -8.1     - 2 ) )+ cos( 12 * (16,2 + 2) )";

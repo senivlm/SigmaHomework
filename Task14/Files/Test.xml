@@ -1,0 +1,1 @@
+<GoodsBase i:type="a:Chair" xmlns="http://schemas.datacontract.org/2004/07/Task14.GoodsModels.GoodsAbstractions" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns:a="http://schemas.datacontract.org/2004/07/Task14.GoodsModels"><Name>Chair</Name><Price>20.00</Price><Height>40</Height><Length>20</Length><Material>MDF</Material><Width>30</Width></GoodsBase>

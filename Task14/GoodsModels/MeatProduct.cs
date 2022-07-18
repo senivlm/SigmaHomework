@@ -1,31 +1,25 @@
-﻿namespace Task12.Problem1.Products
+﻿using System.Runtime.Serialization;
+using Task14.GoodsModels.GoodsAbstractions;
+using Task14.Enums;
+
+namespace Task14.GoodsModels
 {
-    public enum MeatCategory
-    {
-        TopGrade,
-        FirstGrade,
-        SecondGrade
-    }
-    public enum MeatType
-    {
-        Mutton,
-        Veal,
-        Pork,
-        Chicken
-    }
-    public class Meat : Product
+    [DataContract(Name = "MeatProduct")]
+    public class MeatProduct : FoodProductBase
     {
         #region Properties
-        public MeatCategory Category { get; private set; }
-        public MeatType Type { get; private set; }
+        [DataMember(Name = "Category")]
+        public MeatCategory Category { get; protected set; }
+        [DataMember(Name = "Type")]
+        public MeatType Type { get; protected set; }
         #endregion
 
         #region Constructors
-        public Meat() : this("", 0.0m, 0.1m, default, default)
+        public MeatProduct() : base("", 0.0m, 0.1)
         {
 
         }
-        public Meat(string name, decimal price, decimal weight, MeatCategory category, MeatType type) : base(name, price, weight)
+        public MeatProduct(string name, decimal price, double weight, MeatCategory category, MeatType type) : base(name, price, weight)
         {
             Category = category;
             Type = type;
@@ -35,7 +29,7 @@
         #region Methods
         public override bool Equals(object? otherProduct)
         {
-            if (otherProduct != null && otherProduct is Meat product)
+            if (otherProduct != null && otherProduct is MeatProduct product)
             {
                 return base.Equals(product) &&
                 Category.Equals(product.Category) &&
@@ -52,8 +46,8 @@
         public override string ToString()
         {
             return base.ToString() +
-                $"Product category: {Category}\n" +
-                $"Product type: {Type}\n";
+                $"Category: {Category}\n" +
+                $"Type: {Type}\n";
         }
         #endregion
     }
