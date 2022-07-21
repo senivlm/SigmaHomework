@@ -3,7 +3,7 @@ using Task14.GoodsModels.GoodsInterfaces;
 using Task14.GoodsModels;
 
 namespace Task14.StorageInformation
-{
+{// можна також використовувати користувацький підхід, застосовуючи інтерфейс ISerializable
     [KnownType(typeof(Table))]
     [KnownType(typeof(Chair))]
     [KnownType(typeof(MeatProduct))]
